@@ -7,6 +7,7 @@ import com.xpert.showcase.bo.PersonBO;
 import com.xpert.showcase.model.Person;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -14,7 +15,7 @@ import javax.faces.bean.ViewScoped;
  * @author Ayslan
  */
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class PersonMB extends AbstractBaseBean<Person> {
 
     @EJB
@@ -27,7 +28,7 @@ public class PersonMB extends AbstractBaseBean<Person> {
 
     @Override
     public String getDataModelOrder() {
-        return "name";
+        return "p.name";
     }
 
     @Override
@@ -35,7 +36,7 @@ public class PersonMB extends AbstractBaseBean<Person> {
     //    return null;
         return new JoinBuilder("p")
                             .innerJoinFetch("p.group", "g")
-                            .innerJoinFetch("g.statusGroup", "s");
+                            .leftJoinFetch("g.statusGroup", "s");
     }
     
     
