@@ -7,29 +7,31 @@
                  xmlns:x="http://xpert.com/faces">
     <ui:param name="title" value="#{msg['person.list']}" />
     <ui:define name="body">
+        
+        <h2>Simple Example</h2>
+        
         <h:form id="formListPerson">
             <x:modalMessages/>
 
             <h:panelGrid columns="2">
 
-                Name:
-                <p:inputText>
-                    <x:restrictionCollector property="name" type="like" addTo="#{personMB.dataModel}" />
-                </p:inputText>
-
-                Group 1:
+                Group:
                 <h:selectOneMenu converter="entityConverter"  >
-                    <x:restrictionCollector property="g" addTo="#{personMB.dataModel}" />
+                    <x:restriction property="group" />
                     <f:selectItem itemLabel="#{xmsg['select']}" />
                     <f:selectItems value="#{findAllBean.get(classMB.group)}" 
                                    var="group"
                                    itemLabel="#{group}"/>
                 </h:selectOneMenu>
 
+                Name:
+                <p:inputText>
+                    <x:restriction property="name" type="like" likeType="begin" ilike="false"  />
+                </p:inputText>
 
                 Status:
                 <h:selectManyCheckbox  converter="omnifaces.GenericEnumConverter" >
-                    <x:restrictionCollector property="p.status" type="in" addTo="#{personMB.dataModel}" />
+                    <x:restriction property="status" type="in"  />
                     <f:selectItems value="#{findAllBean.get(classMB.status)}" 
                                    var="status"
                                    itemLabel="#{status}"/>
@@ -37,32 +39,69 @@
 
                 Active:
                 <h:selectOneMenu converter="javax.faces.Boolean" >
-                    <x:restrictionCollector property="p.active" addTo="#{personMB.dataModel}" />
+                    <x:restriction property="active"  />
                     <f:selectItem itemLabel="Todos"/>
                     <f:selectItems value="#{booleanSelectItens}" />
                 </h:selectOneMenu>
 
+                Birthday:
+
+                <h:panelGrid columns="3">
+
+                    <p:calendar>
+                        <x:restriction property="birthday" type="gte" />
+                    </p:calendar>
+
+                    to
+
+                    <p:calendar>
+                        <x:restriction property="birthday" type="lte"  />
+                    </p:calendar>
+                </h:panelGrid>
+                
+                Salary
+
+                <h:panelGrid columns="3" rendered="false">
+
+                    <x:inputNumber>
+                        <x:restriction property="salary" type="gte" />
+                    </x:inputNumber>
+
+                    to
+
+                    <x:inputNumber>
+                        <x:restriction property="salary" type="lte"  />
+                    </x:inputNumber>
+                </h:panelGrid>
+
             </h:panelGrid>
 
-            <p:commandButton value="Filter" process="@form" update="@form"/>
-            <p:commandButton value="Limpar" process="@this" update="@form" action="#{personMB.createDataModel}"/>
+            <p:commandButton value="Filter" process="@form" update="@form" >
+                <x:restrictionCollector addTo="#{restrictionComponentMB.dataModelPerson}"  />
+            </p:commandButton>
+
+            <p:commandButton value="Limpar" process="@this" update="@form">
+                <p:resetInput target="@form"/>
+            </p:commandButton>
             <br/>
             <br/>
 
-            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
-                         var="person" rowIndexVar="index" id="dataTablePerson" widgetVar="dataTablePersonWidget" styleClass="table-responsive"
-                         currentPageReportTemplate="#{personMB.dataModel.currentPageReportTemplate}"
-                         paginatorTemplate="#{personMB.dataModel.paginatorTemplate}"
-                         value="#{personMB.dataModel}" lazy="true" >
+            <p:dataTable paginator="true" rows="10" paginatorPosition="bottom"
+                         var="person" rowIndexVar="index"
+                         currentPageReportTemplate="#{restrictionComponentMB.dataModelPerson.currentPageReportTemplate}"
+                         paginatorTemplate="#{restrictionComponentMB.dataModelPerson.paginatorTemplate}"
+                         value="#{restrictionComponentMB.dataModelPerson}" lazy="true" >
                 <p:column styleClass="uix-datatable-index">
                     <h:outputText value="#{index+1}"/>
                 </p:column>
-                <p:column headerText="#{msg['person.code']}" sortBy="#{person.code}"
-                          >
+                <p:column headerText="#{msg['person.birthday']}" sortBy="#{person.birthday}"
+                          style="text-align: right;">
                     <f:facet name="header">
-                        <h:outputText value="#{msg['person.code']}" />
+                        <h:outputText value="#{msg['person.birthday']}" />
                     </f:facet>
-                    <h:outputText value="#{person.code}"/>
+                    <h:outputText value="#{person.birthday}">
+                        <f:convertDateTime />
+                    </h:outputText>
                 </p:column>
                 <p:column headerText="#{msg['person.name']}" sortBy="#{person.name}"
                           >
@@ -70,13 +109,6 @@
                         <h:outputText value="#{msg['person.name']}" />
                     </f:facet>
                     <h:outputText value="#{person.name}"/>
-                </p:column>
-                <p:column headerText="#{msg['person.email']}" sortBy="#{person.email}"
-                          >
-                    <f:facet name="header">
-                        <h:outputText value="#{msg['person.email']}" />
-                    </f:facet>
-                    <h:outputText value="#{person.email}"/>
                 </p:column>
                 <p:column headerText="#{msg['person.salary']}" sortBy="#{person.salary}"
                           style="text-align: right;">
@@ -86,20 +118,6 @@
                     <h:outputText value="#{person.salary}">
                         <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
                     </h:outputText>
-                </p:column>
-                <p:column headerText="#{msg['person.cpf']}" sortBy="#{person.cpf}"
-                          >
-                    <f:facet name="header">
-                        <h:outputText value="#{msg['person.cpf']}" />
-                    </f:facet>
-                    <h:outputText value="#{person.cpf}"/>
-                </p:column>
-                <p:column headerText="#{msg['person.rg']}" sortBy="#{person.rg}"
-                          >
-                    <f:facet name="header">
-                        <h:outputText value="#{msg['person.rg']}" />
-                    </f:facet>
-                    <h:outputText value="#{person.rg}"/>
                 </p:column>
                 <p:column headerText="#{msg['person.status']}" sortBy="#{person.status}"
                           >
@@ -113,7 +131,9 @@
                     <f:facet name="header">
                         <h:outputText value="#{msg['person.group']}" />
                     </f:facet>
-                    <h:outputText value="#{person.group}"/>
+                    <h:outputText value="#{person.group}">
+                        <x:initializer/>
+                    </h:outputText>
                 </p:column>
                 <p:column headerText="#{msg['person.active']}" sortBy="#{person.active}"
                           filterBy="#{person.active}" filterOptions="#{booleanSelectItensEmptyOption}"  style="text-align: center;">

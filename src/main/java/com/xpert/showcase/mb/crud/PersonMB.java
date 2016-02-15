@@ -7,7 +7,6 @@ import com.xpert.showcase.bo.PersonBO;
 import com.xpert.showcase.model.Person;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -15,7 +14,7 @@ import javax.faces.bean.ViewScoped;
  * @author Ayslan
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class PersonMB extends AbstractBaseBean<Person> {
 
     @EJB
@@ -28,6 +27,8 @@ public class PersonMB extends AbstractBaseBean<Person> {
 
     @Override
     public String getDataModelOrder() {
+        
+        
         return "p.name";
     }
 
