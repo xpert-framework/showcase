@@ -28,6 +28,11 @@
                 <p:inputText>
                     <x:restriction property="name" type="like" likeType="begin" ilike="false"  />
                 </p:inputText>
+                
+                CPF:
+                <x:cpf>
+                    <x:restriction property="cpf"  />
+                </x:cpf>
 
                 Status:
                 <h:selectManyCheckbox  converter="omnifaces.GenericEnumConverter" >
@@ -96,55 +101,41 @@
                 <p:column styleClass="uix-datatable-index">
                     <h:outputText value="#{index+1}"/>
                 </p:column>
-                <p:column headerText="#{msg['person.birthday']}" sortBy="#{person.birthday}"
+                <p:column headerText="#{msg['person.name']}" sortBy="#{person.name}"
                           >
-                    <f:facet name="header">
-                        <h:outputText value="#{msg['person.birthday']}" />
-                    </f:facet>
+                    <h:outputText value="#{person.name}"/>
+                </p:column>
+                <p:column headerText="#{msg['person.cpf']}" sortBy="#{person.cpf}"
+                          >
+                    <h:outputText value="#{person.cpf}"/>
+                </p:column>
+                  <p:column headerText="#{msg['person.birthday']}" sortBy="#{person.birthday}"
+                          >
                     <h:outputText value="#{person.birthday}">
                         <f:convertDateTime />
                     </h:outputText>
                 </p:column>
-                <p:column headerText="#{msg['person.name']}" sortBy="#{person.name}"
-                          >
-                    <f:facet name="header">
-                        <h:outputText value="#{msg['person.name']}" />
-                    </f:facet>
-                    <h:outputText value="#{person.name}"/>
-                </p:column>
                 <p:column headerText="#{msg['person.salary']}" sortBy="#{person.salary}"
                           style="text-align: right;">
-                    <f:facet name="header">
-                        <h:outputText value="#{msg['person.salary']}" />
-                    </f:facet>
                     <h:outputText value="#{person.salary}">
                         <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
                     </h:outputText>
                 </p:column>
                 <p:column headerText="#{msg['person.status']}" sortBy="#{person.status}"
                           >
-                    <f:facet name="header">
-                        <h:outputText value="#{msg['person.status']}" />
-                    </f:facet>
                     <h:outputText value="#{person.status}"/>
                 </p:column>
                 <p:column headerText="#{msg['person.group']}" sortBy="#{person.group}"
                           >
-                    <f:facet name="header">
-                        <h:outputText value="#{msg['person.group']}" />
-                    </f:facet>
                     <h:outputText value="#{person.group}">
                         <x:initializer/>
                     </h:outputText>
                 </p:column>
-                <p:column headerText="#{msg['person.active']}" sortBy="#{person.active}"
-                          filterBy="#{person.active}" filterOptions="#{booleanSelectItensEmptyOption}"  style="text-align: center;">
-                    <f:facet name="header">
-                        <h:outputText value="#{msg['person.active']}" />
-                    </f:facet>
+                <p:column headerText="#{msg['person.active']}" sortBy="#{person.active}"  style="text-align: center;">
                     <h:outputText value="#{person.active}" converter ="yesNoConverter" />
                 </p:column>
             </p:dataTable>
+            
         </h:form>
 
     </ui:define>

@@ -23,14 +23,11 @@
         <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
 
+    <context-param>  
+        <param-name>primefaces.THEME</param-name>  
+        <param-value>bootstrap</param-value>  
+    </context-param>  
 
-<!--
-    <context-param>
-        <param-name>primefaces.THEME</param-name>
-        <param-value>redmond</param-value>
-    </context-param>
-    -->
-    
     
     <persistence-context-ref>
         <persistence-context-ref-name>persistence/entityManager</persistence-context-ref-name>
@@ -39,45 +36,6 @@
     
     <!-- Xpert framework configuration -->
     
-    <!-- Bundle -->
-    
-    <!--
-    <context-param>
-        <param-name>xpert.ENTITY_MANAGER_FACTORY</param-name>
-        <param-value>com.xpert.showcase.dao.EntityManagerFactoryImpl</param-value>
-    </context-param>
-    
-    <context-param>
-        <param-name>xpert.BUNDLE_PATH</param-name>
-        <param-value>bundles.messages</param-value>
-    </context-param>
-    
-    <context-param>
-        <param-name>xpert.USE_I18N</param-name>
-        <param-value>false</param-value>
-    </context-param> -->
-    
-    <!-- Auditing -->
-    <!--
-    <context-param>
-        <param-name>xpert.AUDIT</param-name>
-        <param-value>true</param-value>
-    </context-param>
-    
-    <context-param>
-        <param-name>xpert.AUDITING_IMPL</param-name>
-        <param-value>com.xpert.showcase.audit.Auditing</param-value>
-    </context-param>
-    
-    <context-param>
-        <param-name>xpert.METADATA_IMPL</param-name>
-        <param-value>com.xpert.showcase.audit.Metadata</param-value>
-    </context-param>
-    
-    <context-param>
-        <param-name>xpert.AUDITING_LISTENER</param-name>
-        <param-value>com.xpert.showcase.session.AuditingListenerImpl</param-value>
-    </context-param>-->
     
     <context-param>
         <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
