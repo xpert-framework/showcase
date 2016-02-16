@@ -4,7 +4,6 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:p="http://primefaces.org/ui"
                  template="/template/mainTemplate.xhtml"
-                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components"
                  xmlns:custom="http://java.sun.com/jsf/composite/components"
                  xmlns:x="http://xpert.com/faces">
     <ui:param name="title" value="Show Auditing" />
@@ -22,20 +21,20 @@
                     <h:outputText value="#{person.code}"/>
                 </p:column>
                 <p:column headerText="Auditing" style="text-align: center;">
-                    <xc:audit for="#{person}"/>
+                    <x:audit for="#{person}"/>
                 </p:column>
             </p:dataTable>
         </h:form>
          <pre name="code" class="xml">
-            &lt;xc:audit for=&quot;\#{person}&quot;/&gt;
+            &lt;x:audit for=&quot;\#{person}&quot;/&gt;
         </pre>
 
         <h3>Show Auditing Delete</h3>
         <h:form>
-            <xc:auditDelete for="#{personMB.entityClass}"/>
+            <x:auditDelete for="#{personMB.entityClass}"/>
         </h:form>
         <pre name="code" class="xml">
-             &lt;xc:auditDelete for=&quot;\#{personMB.entityClass}&quot;/&gt;
+             &lt;x:auditDelete for=&quot;\#{personMB.entityClass}&quot;/&gt;
         </pre>
 
         <p:spacer height="5"/>
@@ -54,14 +53,14 @@
                                 &lt;h:outputText value=&quot;\#{person.code}&quot;/&gt;
                             &lt;/p:column&gt;
                             &lt;p:column headerText=&quot;Auditing&quot; style=&quot;text-align: center;&quot;&gt;
-                                &lt;xc:audit for=&quot;\#{person}&quot;/&gt;
+                                &lt;x:audit for=&quot;\#{person}&quot;/&gt;
                             &lt;/p:column&gt;
                         &lt;/p:dataTable&gt;
                     &lt;/h:form&gt;
 
                     &lt;h3&gt;Show Auditing Delete&lt;/h3&gt;
                     &lt;h:form&gt;
-                        &lt;xc:auditDelete for=&quot;\#{classMB.person}&quot;/&gt;
+                        &lt;x:auditDelete for=&quot;\#{classMB.person}&quot;/&gt;
                     &lt;/h:form&gt;
                 </pre>
             </p:tab>

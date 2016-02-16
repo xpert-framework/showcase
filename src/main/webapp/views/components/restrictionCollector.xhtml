@@ -5,7 +5,7 @@
                  xmlns:p="http://primefaces.org/ui"
                  template="/template/mainTemplate.xhtml"
                  xmlns:x="http://xpert.com/faces">
-    <ui:param name="title" value="#{msg['person.list']}" />
+    <ui:param name="title" value="Restriction Collector" />
     <ui:define name="body">
         
         <h2>Simple Example</h2>
@@ -64,25 +64,25 @@
 
                 <h:panelGrid columns="3" >
 
-                    <x:inputNumber>
+                    <x:inputNumber value="#{salary1}">
                         <x:restriction property="salary" type="gte" />
                     </x:inputNumber>
 
                     to
-                    
 
-                    <x:inputNumber>
+                    <x:inputNumber value="#{salary2}">
                         <x:restriction property="salary" type="lte"  />
                     </x:inputNumber>
+                    
                 </h:panelGrid>
 
             </h:panelGrid>
 
             <p:commandButton value="Filter" process="@form" update="@form" >
-                <x:restrictionCollector addTo="#{restrictionComponentMB.dataModelPerson}"  />
+                <x:restrictionCollector addTo="#{restrictionComponentMB.dataModelPerson}" debug="true"  />
             </p:commandButton>
 
-            <p:commandButton value="Limpar" process="@this" update="@form">
+            <p:commandButton value="Limpar" process="@this" update="@form"  action="#{restrictionComponentMB.init}">
                 <p:resetInput target="@form"/>
             </p:commandButton>
             <br/>
@@ -97,7 +97,7 @@
                     <h:outputText value="#{index+1}"/>
                 </p:column>
                 <p:column headerText="#{msg['person.birthday']}" sortBy="#{person.birthday}"
-                          style="text-align: right;">
+                          >
                     <f:facet name="header">
                         <h:outputText value="#{msg['person.birthday']}" />
                     </f:facet>
