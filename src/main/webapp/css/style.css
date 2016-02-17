@@ -35,4 +35,10 @@ select.form-control{height: 34px !important;}
 .ui-datatable table{ table-layout: auto; }
 .ui-datatable .ui-datatable-tablewrapper tbody > tr > td {padding: 3px; white-space: normal;}
 .ui-datatable thead > tr > th {white-space: normal !important;}
-.page-title{font-size: 24px; border-bottom: 1px solid #EBEBEB}
+.page-title{font-size: 24px; border-bottom: 1px solid #EBEBEB;padding-left: 5px;}
+.sub-title{font-size: 16px; border-bottom: 1px solid #EBEBEB; margin-top: 30px; margin-bottom: 20px; padding-left: 10px;}
+.description-box{border: 1px solid #EBEBEB; padding: 20px 10px; font-size: 12px; background: #F8F8F8; margin-bottom: 10px;}
+.ui-accordion .ui-accordion-header .ui-icon {     display: block;}
+.ui-accordion{    margin-top: 5px;}
+.ui-accordion .ui-accordion-header{    font-size: 13px; color: #0088CC;}
+.links a{color: #0088CC; padding: 2px; display: block;}

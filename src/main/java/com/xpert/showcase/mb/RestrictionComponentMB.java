@@ -32,6 +32,7 @@ public class RestrictionComponentMB implements Serializable {
     private PersonVO personVO = new PersonVO();
 
     private LazyDataModelImpl<Person> dataModelPerson;
+    private LazyDataModelImpl<Person> dataModelOnDemand;
     private LazyDataModelImpl<Person> dataModelWithRestriction;
     private LazyDataModelImpl<Person> dataModelPersonWithJoin;
 
@@ -45,16 +46,16 @@ public class RestrictionComponentMB implements Serializable {
             return;
         }
 
+    }
+    
+    public void validate() {
+
         if (personVO.getBirthdayBegin() != null && personVO.getBirthdayEnd() != null) {
             if (personVO.getBirthdayBegin().after(personVO.getBirthdayEnd())) {
                 FacesMessageUtils.warning("Birthday begin date is greater then end date");
                 RestrictionCollector.ignoreRestrictions();
                 return;
             }
-        }
-
-        for (Restriction restriction : restrictions) {
-            FacesMessageUtils.info("Restriction: " + restriction.getProperty() + " " + restriction.getRestrictionType().getSymbol() + " " + restriction.getValue());
         }
 
     }
@@ -64,7 +65,11 @@ public class RestrictionComponentMB implements Serializable {
         
         //data model simple
         dataModelPerson = new LazyDataModelImpl("name", personDAO);
-
+        
+        //data model on demand (not loaded)
+        dataModelOnDemand = new LazyDataModelImpl("name", personDAO);
+        dataModelOnDemand.setLoadData(false);
+        
         //data model with pre defined restriction
         dataModelWithRestriction = new LazyDataModelImpl("name", personDAO);
         Restrictions restrictions = new Restrictions();
@@ -109,5 +114,15 @@ public class RestrictionComponentMB implements Serializable {
     public void setPersonVO(PersonVO personVO) {
         this.personVO = personVO;
     }
+
+    public LazyDataModelImpl<Person> getDataModelOnDemand() {
+        return dataModelOnDemand;
+    }
+
+    public void setDataModelOnDemand(LazyDataModelImpl<Person> dataModelOnDemand) {
+        this.dataModelOnDemand = dataModelOnDemand;
+    }
+    
+    
 
 }

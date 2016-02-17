@@ -8,60 +8,63 @@
     <ui:param name="title" value="Restriction Collector" />
     <ui:define name="body">
 
-        <h2>Simple Example</h2>
-        <h:form id="formSimpleExample">
-            <p:messages/>
+        <div class="description">
+            Restrition Collector é um componente para adicionar restrições em Listas e em LazyDataModel.<br/>
+            Existem 2 componentes para isso  o <b>x:restriction</b> e <b>x:restrictionCollector</b>
+        </div>
+
+        <h3>x:restriction</h3>
+        Usado para definir a restrição, nele pode ser configurado o nome da propriedade e outros parâmetros.
+
+        <pre name="code" class="xml">
+                &lt;p:inputText&gt;
+                    &lt;x:restriction property=&quot;name&quot; type=&quot;like&quot; /&gt;
+                &lt;/p:inputText&gt; 
+        </pre>
 
 
-            <h:panelGrid columns="2">
+        <h3>x:restrictionCollector</h3>
+        Este componente é um ActionListener, ele define quem receberá as restrições.
 
-                Code:
-                <p:inputMask mask="9?9999" converter="javax.faces.Long" >
-                    <x:restriction property="code" />
-                </p:inputMask>
-
-                Name:
-                <p:inputText>
-                    <x:restriction property="name" type="like"  />
-                </p:inputText>
+        <pre name="code" class="xml">
+                &lt;p:commandButton value=&quot;Filter&quot; &gt;
+                    &lt;x:restrictionCollector addTo=&quot;\#{restrictionComponentMB.dataModelPerson}&quot; /&gt;
+                &lt;/p:commandButton&gt;
+        </pre>
 
 
-            </h:panelGrid>
+        <h3>Demo</h3>
 
-            <br/>
 
-            <p:commandButton value="Filter" icon="ui-icon-search" process="@form" update="@form"  >
-                <x:restrictionCollector addTo="#{restrictionComponentMB.dataModelPerson}" debug="true" />
-            </p:commandButton>
+        <ul class="links">
+            <li>
+                <a href="#simpleExample">Simple Example</a>
+            </li>
+            <li>
+                <a href="#validation">Validation</a>
+            </li>
+            <li>
+                <a href="#loadOnDemand">Load on demand (Data is not initially loaded)</a>
+            </li>
+            <li>
+                <a href="#initialRestrictions">Data Model with predefined restrictions</a>
+            </li>
+            <li>
+                <a href="#joinExample">Data Model with Join</a>
+            </li>
+        </ul>
 
-            <p:commandButton value="Limpar" icon="ui-icon-close" process="@this" update="@form"  action="#{restrictionComponentMB.init}">
-                <p:resetInput target="@form"/>
-            </p:commandButton>
 
-            <br/>
-            <br/>
+        <ui:include src="restrictionCollector/simpleExample.xhtml"/>
+        <ui:include src="restrictionCollector/validationExample.xhtml"/>
+        <ui:include src="restrictionCollector/loadOnDemand.xhtml"/>
+        <ui:include src="restrictionCollector/initialRestrictions.xhtml"/>
+        <ui:include src="restrictionCollector/joinExample.xhtml"/>
 
-            <p:dataTable paginator="true" rows="10" paginatorPosition="bottom"
-                         var="person" rowIndexVar="index"
-                         currentPageReportTemplate="#{restrictionComponentMB.dataModelPerson.currentPageReportTemplate}"
-                         paginatorTemplate="#{restrictionComponentMB.dataModelPerson.paginatorTemplate}"
-                         value="#{restrictionComponentMB.dataModelPerson}" lazy="true" >
-                <p:column styleClass="uix-datatable-index">
-                    <h:outputText value="#{index+1}"/>
-                </p:column>
-                <p:column headerText="#{msg['person.code']}" sortBy="#{person.code}"
-                          >
-                    <h:outputText value="#{person.code}"/>
-                </p:column>
-                <p:column headerText="#{msg['person.name']}" sortBy="#{person.name}"
-                          >
-                    <h:outputText value="#{person.name}"/>
-                </p:column>
-            </p:dataTable>
 
-        </h:form>
 
-        <h2>Complex Example</h2>
+
+        <h2 class="sub-title">Complex Example</h2>
 
         <h:form id="formComplexExample">
             <x:modalMessages/>
@@ -136,17 +139,17 @@
 
             </h:panelGrid>
 
-            <p:commandButton value="Filter" process="@form" update="@form" actionListener="#{restrictionComponentMB.verifyRestrictions}">
+            <p:commandButton value="Filter" icon="ui-icon-search"  process="@form" update="@form" actionListener="#{restrictionComponentMB.verifyRestrictions}">
                 <x:restrictionCollector addTo="#{restrictionComponentMB.dataModelPerson}" debug="true"  />
             </p:commandButton>
 
-            <p:commandButton value="Limpar" process="@this" update="@form"  action="#{restrictionComponentMB.init}">
+            <p:commandButton value="Limpar" icon="ui-icon-close"  process="@this" update="@form"  action="#{restrictionComponentMB.init}">
                 <p:resetInput target="@form"/>
             </p:commandButton>
             <br/>
             <br/>
 
-            <p:dataTable paginator="true" rows="10" paginatorPosition="bottom"
+            <p:dataTable paginator="true" rows="5" paginatorPosition="bottom"
                          var="person" rowIndexVar="index"
                          currentPageReportTemplate="#{restrictionComponentMB.dataModelPerson.currentPageReportTemplate}"
                          paginatorTemplate="#{restrictionComponentMB.dataModelPerson.paginatorTemplate}"
@@ -190,6 +193,7 @@
             </p:dataTable>
 
         </h:form>
+
 
     </ui:define>
 </ui:composition>
