@@ -8,9 +8,8 @@
 
     <h2 class="sub-title" id="validation">Validation</h2>
 
-    In this example the field "status" is required (using required="true") and a VO (Value Object) is used to validate Birthday in managed bean.
+    <h:outputText value="#{msg['restrictionComponent.validationExample']}"/>
 
-    Nesse exemplo o campo "status" é obrigatório e um VO (Value Object) é usado para validar a Data de nascimento no managed bean
     <br/>
     <br/>
 
@@ -46,7 +45,7 @@
         </h:panelGrid>
         <small>
             #{xmsg.requiredFieldsForm} <br/>
-            (**) Must inform one field and initial date must not be greater than end date
+            #{msg['restrictionComponent.validationExampleDate']}
         </small>
         <br/>
         <br/>
@@ -118,8 +117,8 @@
 
                             &lt;/h:panelGrid&gt;
                             &lt;small&gt;
-                        #{xmsg.requiredFieldsForm} &lt;br/&gt;
-                                (**) Must inform one field and initial date must not be greater than end date
+                                #{xmsg.requiredFieldsForm} &lt;br/&gt;
+                                #{msg['restrictionComponent.validationExampleDate']}
                             &lt;/small&gt;
 
                             &lt;p:commandButton value=&quot;Filter&quot; icon=&quot;ui-icon-search&quot;  process=&quot;@form&quot; update=&quot;@form&quot; actionListener=&quot;\#{restrictionComponentMB.validate}&quot;&gt;

@@ -9,13 +9,15 @@
     <ui:define name="body">
 
         <div class="description">
-            Restrition Collector é um componente para adicionar restrições em Listas e em LazyDataModel.<br/>
-            Existem 2 componentes para isso  o <b>x:restriction</b> e <b>x:restrictionCollector</b>
+
+            <h:outputText value="#{msg['restrictionComponent.description']}" escape="false"/>
+
         </div>
 
         <h3>x:restriction</h3>
-        Usado para definir a restrição, nele pode ser configurado o nome da propriedade e outros parâmetros.
 
+        <h:outputText value="#{msg['restrictionComponent.description2']}" escape="false"/>
+        
         <pre name="code" class="xml">
                 &lt;p:inputText&gt;
                     &lt;x:restriction property=&quot;name&quot; type=&quot;like&quot; /&gt;
@@ -24,7 +26,8 @@
 
 
         <h3>x:restrictionCollector</h3>
-        Este componente é um ActionListener, ele define quem receberá as restrições.
+
+        <h:outputText value="#{msg['restrictionComponent.description3']}" escape="false"/>
 
         <pre name="code" class="xml">
                 &lt;p:commandButton value=&quot;Filter&quot; &gt;
