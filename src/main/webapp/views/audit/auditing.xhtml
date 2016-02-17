@@ -6,6 +6,7 @@
                  template="/template/mainTemplate.xhtml"
                  xmlns:custom="http://java.sun.com/jsf/composite/components"
                  xmlns:x="http://xpert.com/faces">
+    <ui:param name="docsLink" value="https://github.com/xpert-framework/xpert-framework/wiki/Auditando-as-entidades-com-o-Xpert-Audit" />
     <ui:param name="title" value="Show Auditing" />
     <ui:define name="body">
 
@@ -25,7 +26,7 @@
                 </p:column>
             </p:dataTable>
         </h:form>
-         <pre name="code" class="xml">
+        <pre name="code" class="xml">
             &lt;x:audit for=&quot;\#{person}&quot;/&gt;
         </pre>
 

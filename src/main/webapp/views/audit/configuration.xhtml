@@ -5,7 +5,7 @@
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:x="http://xpert.com/faces"
                  template="/template/mainTemplate.xhtml">
-
+    <ui:param name="docsLink" value="https://github.com/xpert-framework/xpert-framework/wiki/Auditando-as-entidades-com-o-Xpert-Audit" />
     <ui:param name="title" value="Audit - Configuration" />
     <ui:define name="body">
 
@@ -192,14 +192,14 @@
                 </pre>
             </p:tab>
             <p:tab title="Using Custom DAO">
-                  This is a example of a custom Generic DAO, so you don't need to extend/implement Xpert BaseDAO.
-                  <pre name="code" class="java">
+                This is a example of a custom Generic DAO, so you don't need to extend/implement Xpert BaseDAO.
+                <pre name="code" class="java">
                         import com.xpert.audit.Audit
-                  </pre>
-                  
-                  <br/>
-                  <h3>Using JPA "Merge"</h3>
-                  <pre name="code" class="java">
+                </pre>
+
+                <br/>
+                <h3>Using JPA "Merge"</h3>
+                <pre name="code" class="java">
                     //merge can save or update a entity
                     //for update
                     boolean persisted = EntityUtils.isPersisted(object);
@@ -212,12 +212,12 @@
                     if (!persisted) {
                         audit.insert(object);
                     }
-                  </pre>
-                  <h3>Using JPA "Persist"</h3>
-                  <pre name="code" class="java">
+                </pre>
+                <h3>Using JPA "Persist"</h3>
+                <pre name="code" class="java">
                      getEntityManager().persist(object);
                      new Audit(getEntityManager()).insert(object);
-                  </pre>
+                </pre>
             </p:tab>
             <p:tab title="Ignore from Audit">
                 <h3>@NotAudited</h3>
@@ -254,7 +254,7 @@
                         }
                     }
                 </pre>
-                
+
             </p:tab>
 
 

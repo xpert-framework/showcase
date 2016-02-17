@@ -7,115 +7,108 @@
                  template="/template/mainTemplate.xhtml"
                  >
 
+    <ui:param name="docsLink" value="https://github.com/xpert-framework/xpert-framework/wiki/CPF-e-CNPJ" />
     <ui:param name="title" value="CPF/CNPJ" />
     <ui:define name="body">
 
-        <p:tabView>
-            <p:tab title="CPF">
+        <h2 class="sub-title">CPF</h2>
+        <h:form>
+            <p:messages />
+            <h:panelGrid columns="2">
 
+                <h:outputText value="CPF:" />
+                <x:cpf/>
 
-                <h2>CPF</h2>
-                <h:form>
-                    <p:messages autoUpdate="true"/>
-                    <h:panelGrid columns="2">
+                <h:outputText value="Placeholder/slotChar:" />
+                <x:cpf slotChar=""/>
 
-                        <h:outputText value="CPF:" />
-                        <x:cpf/>
+                <h:outputText value="With Ajax:" />
+                <h:panelGroup>
+                    <x:cpf value="#{requestScope.cpf}">
+                        <p:ajax event="blur" global="false" update="@this cpfValue" process="@this"/>
+                    </x:cpf>
+                    <h:outputText id="cpfValue" value="#{requestScope.cpf}" converter="cpfConverter" />
+                </h:panelGroup>
 
-                        <h:outputText value="Placeholder/slotChar:" />
-                        <x:cpf slotChar=""/>
+            </h:panelGrid>
+            <p:commandButton process="@form" update="@form" value="Submit"/>
+        </h:form>
 
-                        <h:outputText value="With Ajax:" />
-                        <h:panelGroup>
-                            <x:cpf value="#{requestScope.cpf}">
-                                <p:ajax event="blur" global="false" update="cpfValue" process="@this"/>
-                            </x:cpf>
-                            <h:outputText id="cpfValue" value="#{requestScope.cpf}" converter="cpfConverter" />
-                        </h:panelGroup>
+        <h3>Source</h3>
+        <pre name="code" class="xml">
+            &lt;h2&gt;CPF&lt;/h2&gt;
+            &lt;h:form&gt;
+                &lt;p:messages/&gt;
+                &lt;h:panelGrid columns=&quot;2&quot;&gt;
 
-                    </h:panelGrid>
-                    <p:commandButton process="@form" update="@form" value="Submit"/>
-                </h:form>
+                    &lt;h:outputText value=&quot;CPF:&quot; /&gt;
+                    &lt;x:cpf/&gt;
 
-                <h3>Source</h3>
-                <pre name="code" class="xml">
-&lt;h2&gt;CPF&lt;/h2&gt;
-&lt;h:form&gt;
-    &lt;p:messages/&gt;
-    &lt;h:panelGrid columns=&quot;2&quot;&gt;
+                    &lt;h:outputText value=&quot;Placeholder/slotChar:&quot; /&gt;
+                    &lt;x:cpf slotChar=&quot;&quot;/&gt;
 
-        &lt;h:outputText value=&quot;CPF:&quot; /&gt;
-        &lt;x:cpf/&gt;
+                    &lt;h:outputText value=&quot;With Ajax:&quot; /&gt;
+                    &lt;h:panelGroup&gt;
+                        &lt;x:cpf value=&quot;\#{requestScope.cpf}&quot;&gt;
+                            &lt;p:ajax event=&quot;blur&quot; global=&quot;false&quot; update=&quot;cpfValue @this&quot; process=&quot;@this&quot;/&gt;
+                        &lt;/x:cpf&gt;
+                        &lt;h:outputText id=&quot;cpfValue&quot; value=&quot;\#{requestScope.cpf}&quot; converter=&quot;cpfConverter&quot; /&gt;
+                    &lt;/h:panelGroup&gt;
 
-        &lt;h:outputText value=&quot;Placeholder/slotChar:&quot; /&gt;
-        &lt;x:cpf slotChar=&quot;&quot;/&gt;
+                &lt;/h:panelGrid&gt;
+                &lt;p:commandButton process=&quot;@form&quot; update=&quot;@form&quot; value=&quot;Submit&quot;/&gt;
+            &lt;/h:form&gt;
+        </pre>
 
-        &lt;h:outputText value=&quot;With Ajax:&quot; /&gt;
-        &lt;h:panelGroup&gt;
-            &lt;x:cpf value=&quot;\#{requestScope.cpf}&quot;&gt;
-                &lt;p:ajax event=&quot;blur&quot; global=&quot;false&quot; update=&quot;cpfValue&quot; process=&quot;@this&quot;/&gt;
-            &lt;/x:cpf&gt;
-            &lt;h:outputText id=&quot;cpfValue&quot; value=&quot;\#{requestScope.cpf}&quot; converter=&quot;cpfConverter&quot; /&gt;
-        &lt;/h:panelGroup&gt;
+        <h2 class="sub-title">CNPJ</h2>
+        <h:form>
+            <p:messages/>
+            <h:panelGrid columns="2">
 
-    &lt;/h:panelGrid&gt;
-    &lt;p:commandButton process=&quot;@form&quot; update=&quot;@form&quot; value=&quot;Submit&quot;/&gt;
-&lt;/h:form&gt;
-                </pre>
-            </p:tab>
-            <p:tab title="CNPJ">
+                <h:outputText value="CNPJ" />
+                <x:cnpj/>
 
-                <h2>CNPJ</h2>
-                <h:form>
-                    <p:messages autoUpdate="true"/>
-                    <h:panelGrid columns="2">
+                <h:outputText value="Placeholder/slotChar:" />
+                <x:cnpj slotChar=""/>
 
-                        <h:outputText value="CNPJ" />
-                        <x:cnpj/>
+                <h:outputText value="With Ajax:" />
+                <h:panelGroup>
+                    <x:cnpj value="#{requestScope.cnpj}">
+                        <p:ajax event="blur" global="false" update="@this cnpjValue" process="@this"/>
+                    </x:cnpj>
+                    <h:outputText id="cnpjValue" value="#{requestScope.cnpj}" converter="cnpjConverter" />
+                </h:panelGroup>
 
-                        <h:outputText value="Placeholder/slotChar:" />
-                        <x:cnpj slotChar=""/>
+            </h:panelGrid>
+            <p:commandButton process="@form" update="@form" value="Submit"/>
+        </h:form>
 
-                        <h:outputText value="With Ajax:" />
-                        <h:panelGroup>
-                            <x:cnpj value="#{requestScope.cnpj}">
-                                <p:ajax event="blur" global="false" update="cnpjValue" process="@this"/>
-                            </x:cnpj>
-                            <h:outputText id="cnpjValue" value="#{requestScope.cnpj}" converter="cnpjConverter" />
-                        </h:panelGroup>
+        <h3>Source</h3>
+        <pre name="code" class="xml">
+            &lt;h2&gt;CNPJ&lt;/h2&gt;
+            &lt;h:form&gt;
+                &lt;p:messages/&gt;
+                &lt;h:panelGrid columns=&quot;2&quot;&gt;
 
-                    </h:panelGrid>
-                    <p:commandButton process="@form" update="@form" value="Submit"/>
-                </h:form>
+                    &lt;h:outputText value=&quot;CNPJ&quot; /&gt;
+                    &lt;x:cnpj/&gt;
 
-                <h3>Source</h3>
-                <pre name="code" class="xml">
-&lt;h2&gt;CNPJ&lt;/h2&gt;
-&lt;h:form&gt;
-    &lt;p:messages/&gt;
-    &lt;h:panelGrid columns=&quot;2&quot;&gt;
+                    &lt;h:outputText value=&quot;Placeholder/slotChar:&quot; /&gt;
+                    &lt;x:cnpj slotChar=&quot;&quot;/&gt;
 
-        &lt;h:outputText value=&quot;CNPJ&quot; /&gt;
-        &lt;x:cnpj/&gt;
+                    &lt;h:outputText value=&quot;With Ajax:&quot; /&gt;
+                    &lt;h:panelGroup&gt;
+                        &lt;x:cnpj value=&quot;\#{requestScope.cnpj}&quot;&gt;
+                            &lt;p:ajax event=&quot;blur&quot; global=&quot;false&quot; update=&quot;cnpjValue @this&quot; process=&quot;@this&quot;/&gt;
+                        &lt;/x:cnpj&gt;
+                        &lt;h:outputText id=&quot;cnpjValue&quot; value=&quot;\#{requestScope.cnpj}&quot; converter=&quot;cnpjConverter&quot; /&gt;
+                    &lt;/h:panelGroup&gt;
 
-        &lt;h:outputText value=&quot;Placeholder/slotChar:&quot; /&gt;
-        &lt;x:cnpj slotChar=&quot;&quot;/&gt;
+                &lt;/h:panelGrid&gt;
+                &lt;p:commandButton process=&quot;@form&quot; update=&quot;@form&quot; value=&quot;Submit&quot;/&gt;
+            &lt;/h:form&gt;
+        </pre>
 
-        &lt;h:outputText value=&quot;With Ajax:&quot; /&gt;
-        &lt;h:panelGroup&gt;
-            &lt;x:cnpj value=&quot;\#{requestScope.cnpj}&quot;&gt;
-                &lt;p:ajax event=&quot;blur&quot; global=&quot;false&quot; update=&quot;cnpjValue&quot; process=&quot;@this&quot;/&gt;
-            &lt;/x:cnpj&gt;
-            &lt;h:outputText id=&quot;cnpjValue&quot; value=&quot;\#{requestScope.cnpj}&quot; converter=&quot;cnpjConverter&quot; /&gt;
-        &lt;/h:panelGroup&gt;
-
-    &lt;/h:panelGrid&gt;
-    &lt;p:commandButton process=&quot;@form&quot; update=&quot;@form&quot; value=&quot;Submit&quot;/&gt;
-&lt;/h:form&gt;
-                </pre>
-
-            </p:tab>
-        </p:tabView>
 
     </ui:define>
 </ui:composition>

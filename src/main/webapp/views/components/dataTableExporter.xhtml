@@ -5,23 +5,24 @@
                  xmlns:p="http://primefaces.org/ui"
                  template="/template/mainTemplate.xhtml"
                  xmlns:x="http://xpert.com/faces">
-    <ui:param name="docsLink" value="https://github.com/xpert-framework/xpert-framework/wiki/RestorableFilter" />
-    <ui:param name="title" value="Restorable Filter" />
+    <ui:param name="docsLink" value="https://github.com/xpert-framework/xpert-framework/wiki/DataTableExporter" />
+    <ui:param name="title" value="DataTableExporter" />
     <ui:define name="body">
         <h:form id="formListPerson">
 
-            RestorableFilter enable capacity to store a LazyDataModel filters in session
+            DataTableExporter is a generic set of DataTable exporters (using primefaces and primefaces extensions)
 
             <pre name="code" class="xml">
-                &lt;x:restorableFilter target=&quot;dataTable&quot;  /&gt;
+            &lt;x:dataTableExporter fileName=&quot;person_export&quot; target=&quot;:formListPerson:dataTablePerson&quot;  /&gt;
             </pre>
 
-            <h2>Demo</h2>
+            <h3>Demo</h3>
 
-            <x:restorableFilter target="dataTablePersonRestorable"  />
-
+            <x:dataTableExporter fileName="person_export" target=":formListPerson:dataTablePerson" />
+            <br/>
+            <br/>
             <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
-                         var="person" rowIndexVar="index" id="dataTablePersonRestorable" widgetVar="dataTablePersonWidget" styleClass="table-responsive"
+                         var="person" rowIndexVar="index" id="dataTablePerson" widgetVar="dataTablePersonWidget" styleClass="table-responsive"
                          currentPageReportTemplate="#{personMB.dataModel.currentPageReportTemplate}"
                          paginatorTemplate="#{personMB.dataModel.paginatorTemplate}"
                          value="#{personMB.dataModel}" lazy="true" >
@@ -42,15 +43,28 @@
                     </f:facet>
                     <h:outputText value="#{person.name}"/>
                 </p:column>
-                <p:column headerText="#{msg['person.birthday']}" sortBy="#{person.birthday}"
-                          filterBy="#{person.birthday}" style="text-align: center"   >
+                <p:column headerText="#{msg['person.email']}" sortBy="#{person.email}"
+                          filterBy="#{person.email}"   >
                     <f:facet name="header">
-                        <h:outputText value="#{msg['person.birthday']}" />
-                        <x:dateFilter/>
+                        <h:outputText value="#{msg['person.email']}" />
                     </f:facet>
-                    <h:outputText value="#{person.birthday}">
-                        <f:convertDateTime/>
+                    <h:outputText value="#{person.email}"/>
+                </p:column>
+                <p:column headerText="#{msg['person.salary']}" sortBy="#{person.salary}"
+                          style="text-align: right;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['person.salary']}" />
+                    </f:facet>
+                    <h:outputText value="#{person.salary}">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
                     </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['person.cpf']}" sortBy="#{person.cpf}"
+                          filterBy="#{person.cpf}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['person.cpf']}" />
+                    </f:facet>
+                    <h:outputText value="#{person.cpf}"/>
                 </p:column>
                 <p:column headerText="#{msg['person.rg']}" sortBy="#{person.rg}"
                           filterBy="#{person.rg}"   >
@@ -66,18 +80,24 @@
                     </f:facet>
                     <h:outputText value="#{person.status}"/>
                 </p:column>
+                <p:column headerText="#{msg['person.active']}" sortBy="#{person.active}"
+                          filterBy="#{person.active}" filterOptions="#{booleanSelectItensEmptyOption}"  style="text-align: center;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['person.active']}" />
+                    </f:facet>
+                    <h:outputText value="#{person.active}" converter ="yesNoConverter" />
+                </p:column>
             </p:dataTable>
+        </h:form>
 
-            <br/>
-            <p:commandButton  type="button" onclick="PF('dataTablePersonWidget').clearFilters()" value="Clear Filters"/>
+        <h3>Source</h3>
+        <pre name="code" class="xml">
+        &lt;h:form id=&quot;formListPerson&quot;&gt;
 
-            <h2>Source</h2>
+            &lt;x:dataTableExporter fileName=&quot;person_export&quot; target=&quot;:formListPerson:dataTablePerson&quot;  /&gt;
 
-            <pre name="code" class="xml">
-             &lt;x:restorableFilter target=&quot;dataTablePersonRestorable&quot;  /&gt;
-            
             &lt;p:dataTable paginator=&quot;true&quot; rows=&quot;10&quot; rowsPerPageTemplate=&quot;10,20,30&quot; paginatorPosition=&quot;bottom&quot; emptyMessage=&quot;\#{xmsg['noRecordFound']}&quot;
-                         var=&quot;person&quot; rowIndexVar=&quot;index&quot; id=&quot;dataTablePersonRestorable&quot; widgetVar=&quot;dataTablePersonWidget&quot; styleClass=&quot;table-responsive&quot;
+                         var=&quot;person&quot; rowIndexVar=&quot;index&quot; id=&quot;dataTablePerson&quot; widgetVar=&quot;dataTablePersonWidget&quot; styleClass=&quot;table-responsive&quot;
                          currentPageReportTemplate=&quot;\#{personMB.dataModel.currentPageReportTemplate}&quot;
                          paginatorTemplate=&quot;\#{personMB.dataModel.paginatorTemplate}&quot;
                          value=&quot;\#{personMB.dataModel}&quot; lazy=&quot;true&quot; &gt;
@@ -85,49 +105,65 @@
                     &lt;h:outputText value=&quot;\#{index+1}&quot;/&gt;
                 &lt;/p:column&gt;
                 &lt;p:column headerText=&quot;\#{msg['person.code']}&quot; sortBy=&quot;\#{person.code}&quot;
-                          filterBy=&quot;\#{person.code}&quot;   &gt;
+                    filterBy=&quot;\#{person.code}&quot;   &gt;
                     &lt;f:facet name=&quot;header&quot;&gt;
                         &lt;h:outputText value=&quot;\#{msg['person.code']}&quot; /&gt;
                     &lt;/f:facet&gt;
                     &lt;h:outputText value=&quot;\#{person.code}&quot;/&gt;
                 &lt;/p:column&gt;
                 &lt;p:column headerText=&quot;\#{msg['person.name']}&quot; sortBy=&quot;\#{person.name}&quot;
-                          filterBy=&quot;\#{person.name}&quot;   &gt;
+                    filterBy=&quot;\#{person.name}&quot;   &gt;
                     &lt;f:facet name=&quot;header&quot;&gt;
                         &lt;h:outputText value=&quot;\#{msg['person.name']}&quot; /&gt;
                     &lt;/f:facet&gt;
                     &lt;h:outputText value=&quot;\#{person.name}&quot;/&gt;
                 &lt;/p:column&gt;
-                &lt;p:column headerText=&quot;\#{msg['person.birthday']}&quot; sortBy=&quot;\#{person.birthday}&quot;
-                          filterBy=&quot;\#{person.birthday}&quot; style=&quot;text-align: center&quot;   &gt;
+                &lt;p:column headerText=&quot;\#{msg['person.email']}&quot; sortBy=&quot;\#{person.email}&quot;
+                    filterBy=&quot;\#{person.email}&quot;   &gt;
                     &lt;f:facet name=&quot;header&quot;&gt;
-                        &lt;h:outputText value=&quot;\#{msg['person.birthday']}&quot; /&gt;
-                        &lt;x:dateFilter/&gt;
+                        &lt;h:outputText value=&quot;\#{msg['person.email']}&quot; /&gt;
                     &lt;/f:facet&gt;
-                    &lt;h:outputText value=&quot;\#{person.birthday}&quot;&gt;
-                        &lt;f:convertDateTime/&gt;
+                    &lt;h:outputText value=&quot;\#{person.email}&quot;/&gt;
+                &lt;/p:column&gt;
+                &lt;p:column headerText=&quot;\#{msg['person.salary']}&quot; sortBy=&quot;\#{person.salary}&quot;
+                       style=&quot;text-align: right;&quot;&gt;
+                    &lt;f:facet name=&quot;header&quot;&gt;
+                        &lt;h:outputText value=&quot;\#{msg['person.salary']}&quot; /&gt;
+                    &lt;/f:facet&gt;
+                    &lt;h:outputText value=&quot;\#{person.salary}&quot;&gt;
+                        &lt;f:convertNumber minFractionDigits=&quot;2&quot; maxFractionDigits=&quot;2&quot; /&gt;
                     &lt;/h:outputText&gt;
                 &lt;/p:column&gt;
+                &lt;p:column headerText=&quot;\#{msg['person.cpf']}&quot; sortBy=&quot;\#{person.cpf}&quot;
+                    filterBy=&quot;\#{person.cpf}&quot;   &gt;
+                    &lt;f:facet name=&quot;header&quot;&gt;
+                        &lt;h:outputText value=&quot;\#{msg['person.cpf']}&quot; /&gt;
+                    &lt;/f:facet&gt;
+                    &lt;h:outputText value=&quot;\#{person.cpf}&quot;/&gt;
+                &lt;/p:column&gt;
                 &lt;p:column headerText=&quot;\#{msg['person.rg']}&quot; sortBy=&quot;\#{person.rg}&quot;
-                          filterBy=&quot;\#{person.rg}&quot;   &gt;
+                    filterBy=&quot;\#{person.rg}&quot;   &gt;
                     &lt;f:facet name=&quot;header&quot;&gt;
                         &lt;h:outputText value=&quot;\#{msg['person.rg']}&quot; /&gt;
                     &lt;/f:facet&gt;
                     &lt;h:outputText value=&quot;\#{person.rg}&quot;/&gt;
                 &lt;/p:column&gt;
                 &lt;p:column headerText=&quot;\#{msg['person.status']}&quot; sortBy=&quot;\#{person.status}&quot;
-                          filterBy=&quot;\#{person.status}&quot;  filterOptions=&quot;\#{findAllBean.getSelect(classMB.status)}&quot; &gt;
+                    filterBy=&quot;\#{person.status}&quot;  filterOptions=&quot;\#{findAllBean.getSelect(classMB.status)}&quot; &gt;
                     &lt;f:facet name=&quot;header&quot;&gt;
                         &lt;h:outputText value=&quot;\#{msg['person.status']}&quot; /&gt;
                     &lt;/f:facet&gt;
                     &lt;h:outputText value=&quot;\#{person.status}&quot;/&gt;
                 &lt;/p:column&gt;
+                &lt;p:column headerText=&quot;\#{msg['person.active']}&quot; sortBy=&quot;\#{person.active}&quot;
+                    filterBy=&quot;\#{person.active}&quot; filterOptions=&quot;\#{booleanSelectItensEmptyOption}&quot;  style=&quot;text-align: center;&quot;&gt;
+                    &lt;f:facet name=&quot;header&quot;&gt;
+                        &lt;h:outputText value=&quot;\#{msg['person.active']}&quot; /&gt;
+                    &lt;/f:facet&gt;
+                    &lt;h:outputText value=&quot;\#{person.active}&quot; converter =&quot;yesNoConverter&quot; /&gt;
+                &lt;/p:column&gt;
             &lt;/p:dataTable&gt;
-
-            &lt;p:commandButton  type=&quot;button&quot; onclick=&quot;PF('dataTablePersonWidget').clearFilters()&quot; value=&quot;Clear Filters&quot;/&gt;
-            </pre>
-
-        </h:form>
-
+        &lt;/h:form&gt;
+        </pre>
     </ui:define>
 </ui:composition>

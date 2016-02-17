@@ -75,6 +75,8 @@
                                 <h:link outcome="/views/components/lazyDataModel.jsf" value="LazyDataModel" />
                                 <h:link outcome="/views/components/restorableFilter.jsf" value="Restorable Filter" />
                                 <h:link outcome="/views/components/restrictionCollector.jsf" value="RestrictionCollector" />
+                                <h:link outcome="/views/components/dataTableExporter.jsf" value="DataTableExporter" />
+                                <h:link outcome="/views/components/dataTableActions.jsf" value="DataTableActions" />
                                 <h:link outcome="/views/components/localeSwitcher.jsf" value="Locale Switcher" />
                                 <h:link outcome="/views/components/modalMessages.jsf" value="Modal Messages" />
                                 <h:link outcome="/views/components/spread.jsf" value="Spread Checkbox" />
@@ -86,7 +88,7 @@
                         </p:panel>
                         <p:panel header="Xpert-Core" style="border: 0;">
                             <h:panelGrid columns="1">
-                                <h:link outcome="/views/core/i18nBeanValidation.jsf" value="I18N Bean Validation (JSR 303)" />
+                                  <h:link outcome="/views/core/i18nBeanValidation.jsf" value="Bean Validation I18N" />
                             </h:panelGrid>
                         </p:panel>
                         <p:panel header="Xpert-Maker" style="border: 0;">
@@ -124,7 +126,21 @@
                     </div>
                 </p:panel>
                 <p:panel style="border: 0;" id="center" >
-                    <h1 class="page-title">#{title}</h1>
+                    <h:panelGroup rendered="#{not empty docsLink}">
+                        <div style="float: right; border-bottom: 0" class="ui-tabs ui-widget ui-widget-content ui-corner-all ui-hidden-container ui-tabs-top"  >
+                            <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+                                <li class="ui-state-default ui-tabs-selected ui-state-active ui-corner-top" >
+                                    <a href="#{docsLink}" target="_blank" style="display: block; cursor: pointer" title="#{docsLink}">
+                                        <span class="ui-icon ui-icon-document" style="margin: 0 !important"></span>
+                                        #{msg['documentation']}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </h:panelGroup>
+                    <h1 class="page-title">
+                        #{title}
+                    </h1>
                     <ui:insert name="body" />
                 </p:panel>
 

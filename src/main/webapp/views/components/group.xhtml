@@ -4,9 +4,8 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:x="http://xpert.com/faces"
-
                  template="/template/mainTemplate.xhtml">
-
+    <ui:param name="docsLink" value="https://github.com/xpert-framework/xpert-framework/wiki/Group" />
     <ui:param name="title" value="Group" />
     <ui:define name="body">
 
@@ -14,7 +13,7 @@
             #{msg['groupComponent.description']}
             <br/>
         </div>
-        
+
         <h3>Usage</h3>
         <pre name="code" class="xml">
         &lt;x:group value=&quot;\#{groupComponentMB.people}&quot; var=&quot;personGroup&quot; groupBy=&quot;city&quot;  &gt;
