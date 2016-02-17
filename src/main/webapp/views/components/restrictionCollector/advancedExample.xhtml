@@ -24,13 +24,12 @@
             </x:cpf>
 
             <h:outputLabel value="Group:" />
-            <h:selectOneMenu converter="entityConverter"   >
-                <x:restriction property="group" />
-                <f:selectItem itemLabel="#{xmsg['select']}" />
+            <h:selectManyCheckbox converter="entityConverter"   >
+                <x:restriction property="group" type="in" />
                 <f:selectItems value="#{findAllBean.get(classMB.group)}" 
                                var="group"
                                itemLabel="#{group}"/>
-            </h:selectOneMenu>
+            </h:selectManyCheckbox>
 
             <h:outputLabel value="Status:" />
             <h:selectManyCheckbox  converter="omnifaces.GenericEnumConverter" >
@@ -149,13 +148,13 @@
                                 &lt;/x:cpf&gt;
 
                                 &lt;h:outputLabel value=&quot;Group:&quot; /&gt;
-                                &lt;h:selectOneMenu converter=&quot;entityConverter&quot;   &gt;
-                                    &lt;x:restriction property=&quot;group&quot; /&gt;
+                                &lt;h:selectManyCheckbox converter=&quot;entityConverter&quot;   &gt;
+                                    &lt;x:restriction property=&quot;group&quot;  type=&quot;in&quot;/&gt;
                                     &lt;f:selectItem itemLabel=&quot;\#{xmsg['select']}&quot; /&gt;
                                     &lt;f:selectItems value=&quot;\#{findAllBean.get(classMB.group)}&quot; 
                                                    var=&quot;group&quot;
                                                    itemLabel=&quot;\#{group}&quot;/&gt;
-                                &lt;/h:selectOneMenu&gt;
+                                &lt;/h:selectManyCheckbox&gt;
 
                                 &lt;h:outputLabel value=&quot;Status:&quot; /&gt;
                                 &lt;h:selectManyCheckbox  converter=&quot;omnifaces.GenericEnumConverter&quot; &gt;
