@@ -18,7 +18,7 @@
         <h3>x:restriction</h3>
 
         <h:outputText value="#{msg['restrictionComponent.description2']}" escape="false"/>
-        
+
         <pre name="code" class="xml">
                 &lt;p:inputText&gt;
                     &lt;x:restriction property=&quot;name&quot; type=&quot;like&quot; /&gt;
@@ -59,6 +59,9 @@
             <li>
                 <a href="#advancedExample">Advanced Example</a>
             </li>
+            <li>
+                <a href="#restrictionList">Restriction List</a>
+            </li>
         </ul>
 
 
@@ -68,11 +71,9 @@
         <ui:include src="restrictionCollector/initialRestrictions.xhtml"/>
         <ui:include src="restrictionCollector/joinExample.xhtml"/>
         <ui:include src="restrictionCollector/advancedExample.xhtml"/>
+        <ui:include src="restrictionCollector/restrictionList.xhtml"/>
 
 
-
-
-      
 
 
     </ui:define>

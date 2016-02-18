@@ -1,0 +1,201 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces">
+
+
+    <h2 class="sub-title" id="restrictionList">RestrictionList</h2>
+
+    <h:outputText value="#{msg['restrictionComponent.restrictionList']}"/>
+
+    <br/>
+    <br/>
+
+    <h:form id="formAddRestriction">
+
+            <p:messages/>
+            <h:panelGrid columns="2">
+
+                <h:outputLabel value="Code:"/>
+                <p:inputMask mask="9?9999" converter="javax.faces.Long" >
+                    <x:restriction property="code" />
+                </p:inputMask>
+
+                <h:outputLabel value="Name:"/>
+                <p:inputText>
+                    <x:restriction property="name" type="like"  />
+                </p:inputText>
+
+                <h:outputLabel value="Salary:" />
+                <h:panelGrid columns="3" >
+                    <x:inputNumber value="#{salaryBegin}">
+                        <x:restriction property="salary" type="gte"  />
+                    </x:inputNumber>
+                    to
+                    <x:inputNumber value="#{salaryEnd}">
+                        <x:restriction property="salary" type="lte"  />
+                    </x:inputNumber>
+
+                </h:panelGrid>
+
+                <h:outputLabel value="Group:" />
+                <h:selectManyCheckbox converter="entityConverter"   >
+                    <x:restriction property="group" type="in" />
+                    <f:selectItems value="#{findAllBean.get(classMB.group)}" 
+                                   var="group"
+                                   itemLabel="#{group}"/>
+                </h:selectManyCheckbox>
+
+                <h:outputLabel value="Status:" />
+                <h:selectManyCheckbox  converter="omnifaces.GenericEnumConverter" >
+                    <x:restriction property="status" type="in"  />
+                    <f:selectItems value="#{findAllBean.get(classMB.status)}" 
+                                   var="status"
+                                   itemLabel="#{status}"/>
+                </h:selectManyCheckbox>
+
+                <h:outputLabel value="Active:" />
+                <h:selectOneMenu converter="javax.faces.Boolean" >
+                    <x:restriction property="active"  />
+                    <f:selectItem itemLabel="Todos"/>
+                    <f:selectItems value="#{booleanSelectItens}" />
+                </h:selectOneMenu>
+
+
+            </h:panelGrid>
+
+            <br/>
+
+            <p:commandButton value="Filter" icon="ui-icon-search" process="@form" update="@form"  >
+                <x:restrictionCollector addTo="#{restrictionComponentMB.restrictions}" debug="true" />
+            </p:commandButton>
+
+            <br/>
+            <br/>
+
+            <p:dataTable var="restriction"
+                         value="#{restrictionComponentMB.restrictions}">
+                <p:column headerText="Property">
+                    <h:outputText value="#{restriction.property}"/>
+                </p:column>
+                <p:column headerText="RestrictionType">
+                    <h:outputText value="#{restriction.restrictionType}"/>
+                </p:column>
+                <p:column headerText="Value">
+                    <h:outputText value="#{restriction.value}"/>
+                </p:column>
+                <p:column headerText="Type">
+                    <h:outputText value="#{restriction.value.getClass().getName()}"/>
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+
+    <p:accordionPanel activeIndex="-1">
+        <p:tab title="Source">
+            <p:tabView>
+                <p:tab title="XHTML">
+                    <pre  name="code" class="xml">
+                        &lt;h:form id=&quot;formAddRestriction&quot;&gt;
+
+                            &lt;p:messages/&gt;
+                            &lt;h:panelGrid columns=&quot;2&quot;&gt;
+
+                                &lt;h:outputLabel value=&quot;Code:&quot;/&gt;
+                                &lt;p:inputMask mask=&quot;9?9999&quot; converter=&quot;javax.faces.Long&quot; &gt;
+                                    &lt;x:restriction property=&quot;code&quot; /&gt;
+                                &lt;/p:inputMask&gt;
+
+                                &lt;h:outputLabel value=&quot;Name:&quot;/&gt;
+                                &lt;p:inputText&gt;
+                                    &lt;x:restriction property=&quot;name&quot; type=&quot;like&quot;  /&gt;
+                                &lt;/p:inputText&gt;
+
+                                &lt;h:outputLabel value=&quot;Salary:&quot; /&gt;
+                                &lt;h:panelGrid columns=&quot;3&quot; &gt;
+                                    &lt;x:inputNumber value=&quot;\#{salaryBegin}&quot;&gt;
+                                        &lt;x:restriction property=&quot;salary&quot; type=&quot;gte&quot;  /&gt;
+                                    &lt;/x:inputNumber&gt;
+                                    to
+                                    &lt;x:inputNumber value=&quot;\#{salaryEnd}&quot;&gt;
+                                        &lt;x:restriction property=&quot;salary&quot; type=&quot;lte&quot;  /&gt;
+                                    &lt;/x:inputNumber&gt;
+
+                                &lt;/h:panelGrid&gt;
+
+                                &lt;h:outputLabel value=&quot;Group:&quot; /&gt;
+                                &lt;h:selectManyCheckbox converter=&quot;entityConverter&quot;   &gt;
+                                    &lt;x:restriction property=&quot;group&quot; type=&quot;in&quot; /&gt;
+                                    &lt;f:selectItems value=&quot;\#{findAllBean.get(classMB.group)}&quot; 
+                                                   var=&quot;group&quot;
+                                                   itemLabel=&quot;\#{group}&quot;/&gt;
+                                &lt;/h:selectManyCheckbox&gt;
+
+                                &lt;h:outputLabel value=&quot;Status:&quot; /&gt;
+                                &lt;h:selectManyCheckbox  converter=&quot;omnifaces.GenericEnumConverter&quot; &gt;
+                                    &lt;x:restriction property=&quot;status&quot; type=&quot;in&quot;  /&gt;
+                                    &lt;f:selectItems value=&quot;\#{findAllBean.get(classMB.status)}&quot; 
+                                                   var=&quot;status&quot;
+                                                   itemLabel=&quot;\#{status}&quot;/&gt;
+                                &lt;/h:selectManyCheckbox&gt;
+
+                                &lt;h:outputLabel value=&quot;Active:&quot; /&gt;
+                                &lt;h:selectOneMenu converter=&quot;javax.faces.Boolean&quot; &gt;
+                                    &lt;x:restriction property=&quot;active&quot;  /&gt;
+                                    &lt;f:selectItem itemLabel=&quot;Todos&quot;/&gt;
+                                    &lt;f:selectItems value=&quot;\#{booleanSelectItens}&quot; /&gt;
+                                &lt;/h:selectOneMenu&gt;
+
+
+                            &lt;/h:panelGrid&gt;
+
+                            &lt;br/&gt;
+
+                            &lt;p:commandButton value=&quot;Filter&quot; icon=&quot;ui-icon-search&quot; process=&quot;@form&quot; update=&quot;@form&quot;  &gt;
+                                &lt;x:restrictionCollector addTo=&quot;\#{restrictionComponentMB.restrictions}&quot; debug=&quot;true&quot; /&gt;
+                            &lt;/p:commandButton&gt;
+
+                            &lt;br/&gt;
+                            &lt;br/&gt;
+
+                            &lt;p:dataTable var=&quot;restriction&quot;
+                                         value=&quot;\#{restrictionComponentMB.restrictions}&quot;&gt;
+                                &lt;p:column headerText=&quot;Property&quot;&gt;
+                                    &lt;h:outputText value=&quot;\#{restriction.property}&quot;/&gt;
+                                &lt;/p:column&gt;
+                                &lt;p:column headerText=&quot;RestrictionType&quot;&gt;
+                                    &lt;h:outputText value=&quot;\#{restriction.restrictionType}&quot;/&gt;
+                                &lt;/p:column&gt;
+                                &lt;p:column headerText=&quot;Value&quot;&gt;
+                                    &lt;h:outputText value=&quot;\#{restriction.value}&quot;/&gt;
+                                &lt;/p:column&gt;
+                                &lt;p:column headerText=&quot;Type&quot;&gt;
+                                        &lt;h:outputText value=&quot;\#{restriction.value.getClass().getName()}&quot;/&gt;
+                                &lt;/p:column&gt;
+                            &lt;/p:dataTable&gt;
+
+                        &lt;/h:form&gt;
+                    </pre>
+                </p:tab>
+                <p:tab title="RestrictionComponentMB.java">
+                    <pre name="code" class="java">
+                        @ManagedBean
+                        @ViewScoped
+                        public class RestrictionComponentMB implements Serializable {
+
+                            @EJB
+                            private PersonDAO personDAO;
+                            private Restrictions restrictions = new Restrictions();
+
+                            //getters and setters
+                        }
+                    </pre>
+                </p:tab>
+                <ui:include src="/views/common/java/person.xhtml"/>
+            </p:tabView>
+        </p:tab>
+    </p:accordionPanel>
+
+</ui:composition>

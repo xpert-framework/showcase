@@ -36,6 +36,16 @@ public class RestrictionComponentMB implements Serializable {
     private LazyDataModelImpl<Person> dataModelWithRestriction;
     private LazyDataModelImpl<Person> dataModelPersonWithJoin;
 
+    private Restrictions restrictions = new Restrictions();
+
+    public void printCurrentRestrictions() {
+        if (restrictions == null) {
+            System.out.println("null restrictions");
+        } else {
+            System.out.println(restrictions);
+        }
+    }
+
     public void verifyRestrictions() {
 
         List<Restriction> restrictions = RestrictionCollector.getCurrentRestrictions();
@@ -47,7 +57,7 @@ public class RestrictionComponentMB implements Serializable {
         }
 
     }
-    
+
     public void validate() {
 
         if (personVO.getBirthdayBegin() != null && personVO.getBirthdayEnd() != null) {
@@ -62,18 +72,16 @@ public class RestrictionComponentMB implements Serializable {
 
     @PostConstruct
     public void init() {
-        
+
         //data model simple
         dataModelPerson = new LazyDataModelImpl("name", personDAO);
-        
+
         //data model on demand (not loaded)
         dataModelOnDemand = new LazyDataModelImpl("name", personDAO);
         dataModelOnDemand.setLoadData(false);
-        
+
         //data model with pre defined restriction
         dataModelWithRestriction = new LazyDataModelImpl("name", personDAO);
-        Restrictions restrictions = new Restrictions();
-        restrictions.add("status", Status.ACTIVE);
         dataModelWithRestriction.setRestrictions(restrictions);
 
         //data model with Join Builder
@@ -121,6 +129,14 @@ public class RestrictionComponentMB implements Serializable {
 
     public void setDataModelOnDemand(LazyDataModelImpl<Person> dataModelOnDemand) {
         this.dataModelOnDemand = dataModelOnDemand;
+    }
+
+    public Restrictions getRestrictions() {
+        return restrictions;
+    }
+
+    public void setRestrictions(Restrictions restrictions) {
+        this.restrictions = restrictions;
     }
     
     
