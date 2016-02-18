@@ -14,9 +14,15 @@
         <h:panelGrid columns="2" >
 
             <h:outputLabel value="Name:" />
-            <p:inputText>
-                <x:restriction property="name" type="like" likeType="begin" ilike="false"  />
-            </p:inputText>
+            <h:panelGroup>
+                <h:selectOneMenu value="#{nameRestriction}">
+                    <f:selectItem itemLabel="equals" itemValue="eq"/>
+                    <f:selectItem itemLabel="like" itemValue="like"/>
+                </h:selectOneMenu>
+                <p:inputText>
+                    <x:restriction property="name" type="#{nameRestriction}"  />
+                </p:inputText>
+            </h:panelGroup>
 
             <h:outputLabel value="CPF:" />
             <x:cpf>
@@ -56,6 +62,13 @@
                     <x:restriction property="birthday" type="lte"  />
                 </p:calendar>
             </h:panelGrid>
+
+            <h:outputLabel value="Has Salary:" />
+            <h:selectOneMenu converter="javax.faces.Boolean" >
+                <x:restriction property="salary" type="notnull" />
+                <f:selectItem itemLabel="Todos"/>
+                <f:selectItems value="#{booleanSelectItens}" />
+            </h:selectOneMenu>
 
             <h:outputLabel value="Salary:" />
             <h:panelGrid columns="3" >

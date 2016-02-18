@@ -48,13 +48,13 @@ public class RestrictionComponentMB implements Serializable {
 
     public void verifyRestrictions() {
 
-        List<Restriction> restrictions = RestrictionCollector.getCurrentRestrictions();
-
-        if (restrictions == null || restrictions.isEmpty()) {
-            FacesMessageUtils.warning("No restriction informed");
-            RestrictionCollector.ignoreRestrictions();
-            return;
-        }
+//        List<Restriction> restrictions = RestrictionCollector.getCurrentRestrictions();
+//
+//        if (restrictions == null || restrictions.isEmpty()) {
+//            FacesMessageUtils.warning("No restriction informed");
+//            RestrictionCollector.ignoreRestrictions();
+//            return;
+//        }
 
     }
 
@@ -82,6 +82,8 @@ public class RestrictionComponentMB implements Serializable {
 
         //data model with pre defined restriction
         dataModelWithRestriction = new LazyDataModelImpl("name", personDAO);
+        Restrictions restrictions = new Restrictions();  
+        restrictions.add("status", Status.ACTIVE); 
         dataModelWithRestriction.setRestrictions(restrictions);
 
         //data model with Join Builder
