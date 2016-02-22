@@ -20,7 +20,7 @@ h1 a{text-decoration: none;}
 .w-280{width: 280px;}
 .grid-detail, grid-form{margin-top: 15px;}
 .grid-detail td, grid-form td{padding: 4px 0;}
-.grid-detail td label, .grid-form td label{margin: 0 5px 0 15px ; float: right;}
+.grid-detail td label, .grid-form > tbody > tr > td > label{margin: 0 5px 0 15px ; float: right; text-align: right;}
 .grid-detail td label{font-weight: bold;}
 .ui-toolbar{margin: 2px 0;}
 .ui-datatable th input.ui-column-filter{width: 90%;}

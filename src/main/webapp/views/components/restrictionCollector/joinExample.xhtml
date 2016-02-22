@@ -38,6 +38,15 @@
                                itemLabel="#{group}"/>
             </h:selectOneMenu>
 
+            <h:outputLabel value="Permission:" />
+            <h:selectOneMenu converter="entityConverter" >
+                <x:restriction property="p.permissions" type="memberof" />
+                <f:selectItem itemLabel=""/>
+                <f:selectItems value="#{findAllBean.get(classMB.permission)}" 
+                               var="permission"
+                               itemLabel="#{permission}"/>
+            </h:selectOneMenu>
+
         </h:panelGrid>
 
         <br/>
@@ -70,6 +79,11 @@
             <p:column headerText="#{msg['person.active']}" sortBy="#{person.active}"  style="text-align: center;">
                 <h:outputText value="#{person.active}" converter ="yesNoConverter" />
             </p:column>
+            <p:column headerText="#{msg['person.permissions']}">
+                <h:outputText value="#{person.permissions}" >
+                    <x:initializer/>
+                </h:outputText>
+            </p:column>
         </p:dataTable>
 
     </h:form>
@@ -79,59 +93,80 @@
             <p:tabView>
                 <p:tab title="XHTML">
                     <pre  name="code" class="xml">
-                        &lt;h:form id=&quot;formWithJoin&quot;&gt;
-                            &lt;p:messages/&gt;
-                            &lt;h:panelGrid columns=&quot;2&quot;&gt;
+    &lt;h:form id=&quot;formWithJoin&quot;&gt;
+        &lt;p:messages/&gt;
 
-                                &lt;h:outputLabel value=&quot;Name:&quot;/&gt;
-                                &lt;p:inputText&gt;
-                                    &lt;x:restriction property=&quot;p.name&quot; type=&quot;like&quot; likeType=&quot;begin&quot;  /&gt;
-                                &lt;/p:inputText&gt;
 
-                                &lt;h:outputLabel value=&quot;CPF:&quot;/&gt;
-                                &lt;x:cpf&gt;
-                                    &lt;x:restriction property=&quot;p.cpf&quot;  /&gt;
-                                &lt;/x:cpf&gt;
+        &lt;h:panelGrid columns=&quot;2&quot;&gt;
 
-                                &lt;h:outputLabel value=&quot;Group:&quot;/&gt;
-                                &lt;h:selectOneMenu converter=&quot;entityConverter&quot;   &gt;
-                                    &lt;x:restriction property=&quot;g&quot; /&gt;
-                                    &lt;f:selectItem itemLabel=&quot;\#{xmsg['select']}&quot; /&gt;
-                                    &lt;f:selectItems value=&quot;\#{findAllBean.get(classMB.group)}&quot; 
-                                                   var=&quot;group&quot;
-                                                   itemLabel=&quot;\#{group}&quot;/&gt;
-                                &lt;/h:selectOneMenu&gt;
+            &lt;h:outputLabel value=&quot;Name:&quot;/&gt;
+            &lt;p:inputText&gt;
+                &lt;x:restriction property=&quot;p.name&quot; type=&quot;like&quot; likeType=&quot;begin&quot;  /&gt;
+            &lt;/p:inputText&gt;
 
-                            &lt;/h:panelGrid&gt;
+            &lt;h:outputLabel value=&quot;CPF:&quot;/&gt;
+            &lt;x:cpf&gt;
+                &lt;x:restriction property=&quot;p.cpf&quot;  /&gt;
+            &lt;/x:cpf&gt;
 
-                            &lt;p:commandButton value=&quot;Filter&quot; icon=&quot;ui-icon-search&quot; process=&quot;@form&quot; update=&quot;@form&quot;  &gt;
-                                &lt;x:restrictionCollector addTo=&quot;\#{restrictionComponentMB.dataModelPersonWithJoin}&quot;  /&gt;
-                            &lt;/p:commandButton&gt;
+            &lt;h:outputLabel value=&quot;Group:&quot;/&gt;
+            &lt;h:selectOneMenu converter=&quot;entityConverter&quot;   &gt;
+                &lt;x:restriction property=&quot;g&quot; /&gt;
+                &lt;f:selectItem itemLabel=&quot;\#{xmsg['select']}&quot; /&gt;
+                &lt;f:selectItems value=&quot;\#{findAllBean.get(classMB.group)}&quot; 
+                               var=&quot;group&quot;
+                               itemLabel=&quot;\#{group}&quot;/&gt;
+            &lt;/h:selectOneMenu&gt;
 
-                            &lt;p:commandButton value=&quot;Limpar&quot; icon=&quot;ui-icon-close&quot; process=&quot;@this&quot; update=&quot;@form&quot;  action=&quot;\#{restrictionComponentMB.init}&quot;&gt;
-                                &lt;p:resetInput target=&quot;@form&quot;/&gt;
-                            &lt;/p:commandButton&gt;
+            &lt;h:outputLabel value=&quot;Permission:&quot; /&gt;
+            &lt;h:selectOneMenu converter=&quot;entityConverter&quot; &gt;
+                &lt;x:restriction property=&quot;p.permissions&quot; type=&quot;memberof&quot; /&gt;
+                &lt;f:selectItem itemLabel=&quot;&quot;/&gt;
+                &lt;f:selectItems value=&quot;\#{findAllBean.get(classMB.permission)}&quot; 
+                               var=&quot;permission&quot;
+                               itemLabel=&quot;\#{permission}&quot;/&gt;
+            &lt;/h:selectOneMenu&gt;
 
-                            &lt;p:dataTable paginator=&quot;true&quot; rows=&quot;5&quot; paginatorPosition=&quot;bottom&quot;
-                                         var=&quot;person&quot;
-                                         currentPageReportTemplate=&quot;\#{restrictionComponentMB.dataModelPersonWithJoin.currentPageReportTemplate}&quot;
-                                         paginatorTemplate=&quot;\#{restrictionComponentMB.dataModelPersonWithJoin.paginatorTemplate}&quot;
-                                         value=&quot;\#{restrictionComponentMB.dataModelPersonWithJoin}&quot; lazy=&quot;true&quot; &gt;
-                                &lt;p:column headerText=&quot;\#{msg['person.name']}&quot; sortBy=&quot;\#{person.name}&quot;  &gt;
-                                    &lt;h:outputText value=&quot;\#{person.name}&quot;/&gt;
-                                &lt;/p:column&gt;
-                                &lt;p:column headerText=&quot;\#{msg['person.cpf']}&quot; sortBy=&quot;\#{person.cpf}&quot; &gt;
-                                    &lt;h:outputText value=&quot;\#{person.cpf}&quot;/&gt;
-                                &lt;/p:column&gt;
-                                &lt;p:column headerText=&quot;\#{msg['person.group']}&quot; sortBy=&quot;\#{person.group}&quot;  &gt;
-                                    &lt;h:outputText value=&quot;\#{person.group}&quot;/&gt;
-                                &lt;/p:column&gt;
-                                &lt;p:column headerText=&quot;\#{msg['person.active']}&quot; sortBy=&quot;\#{person.active}&quot;  style=&quot;text-align: center;&quot;&gt;
-                                    &lt;h:outputText value=&quot;\#{person.active}&quot; converter =&quot;yesNoConverter&quot; /&gt;
-                                &lt;/p:column&gt;
-                            &lt;/p:dataTable&gt;
+        &lt;/h:panelGrid&gt;
 
-                        &lt;/h:form&gt;
+        &lt;br/&gt;
+
+        &lt;p:commandButton value=&quot;Filter&quot; icon=&quot;ui-icon-search&quot; process=&quot;@form&quot; update=&quot;@form&quot;  &gt;
+            &lt;x:restrictionCollector addTo=&quot;\#{restrictionComponentMB.dataModelPersonWithJoin}&quot;  /&gt;
+        &lt;/p:commandButton&gt;
+
+        &lt;p:commandButton value=&quot;Limpar&quot; icon=&quot;ui-icon-close&quot; process=&quot;@this&quot; update=&quot;@form&quot;  action=&quot;\#{restrictionComponentMB.init}&quot;&gt;
+            &lt;p:resetInput target=&quot;@form&quot;/&gt;
+        &lt;/p:commandButton&gt;
+
+        &lt;br/&gt;
+        &lt;br/&gt;
+
+        &lt;p:dataTable paginator=&quot;true&quot; rows=&quot;5&quot; paginatorPosition=&quot;bottom&quot;
+                     var=&quot;person&quot;
+                     currentPageReportTemplate=&quot;\#{restrictionComponentMB.dataModelPersonWithJoin.currentPageReportTemplate}&quot;
+                     paginatorTemplate=&quot;\#{restrictionComponentMB.dataModelPersonWithJoin.paginatorTemplate}&quot;
+                     value=&quot;\#{restrictionComponentMB.dataModelPersonWithJoin}&quot; lazy=&quot;true&quot; &gt;
+            &lt;p:column headerText=&quot;\#{msg['person.name']}&quot; sortBy=&quot;\#{person.name}&quot;  &gt;
+                &lt;h:outputText value=&quot;\#{person.name}&quot;/&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText=&quot;\#{msg['person.cpf']}&quot; sortBy=&quot;\#{person.cpf}&quot; &gt;
+                &lt;h:outputText value=&quot;\#{person.cpf}&quot;/&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText=&quot;\#{msg['person.group']}&quot; sortBy=&quot;\#{person.group}&quot;  &gt;
+                &lt;h:outputText value=&quot;\#{person.group}&quot;/&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText=&quot;\#{msg['person.active']}&quot; sortBy=&quot;\#{person.active}&quot;  style=&quot;text-align: center;&quot;&gt;
+                &lt;h:outputText value=&quot;\#{person.active}&quot; converter =&quot;yesNoConverter&quot; /&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText=&quot;\#{msg['person.permissions']}&quot;&gt;
+                &lt;h:outputText value=&quot;\#{person.permissions}&quot; &gt;
+                    &lt;x:initializer/&gt;
+                &lt;/h:outputText&gt;
+            &lt;/p:column&gt;
+        &lt;/p:dataTable&gt;
+
+    &lt;/h:form&gt;
                     </pre>
                 </p:tab>
                 <p:tab title="RestrictionComponentMB.java">
