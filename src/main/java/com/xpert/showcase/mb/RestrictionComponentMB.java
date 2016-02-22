@@ -48,13 +48,13 @@ public class RestrictionComponentMB implements Serializable {
 
     public void verifyRestrictions() {
 
-//        List<Restriction> restrictions = RestrictionCollector.getCurrentRestrictions();
-//
-//        if (restrictions == null || restrictions.isEmpty()) {
-//            FacesMessageUtils.warning("No restriction informed");
-//            RestrictionCollector.ignoreRestrictions();
-//            return;
-//        }
+        List<Restriction> restrictions = RestrictionCollector.getCurrentRestrictions();
+
+        if (restrictions == null || restrictions.isEmpty()) {
+            FacesMessageUtils.warning("No restriction informed");
+            RestrictionCollector.ignoreRestrictions();
+            return;
+        }
 
     }
 

@@ -145,122 +145,136 @@
             <p:tabView>
                 <p:tab title="XHTML">
                     <pre  name="code" class="xml">
-                        &lt;h:form id=&quot;formAdvancedExample&quot;&gt;
-                            &lt;x:modalMessages/&gt;
+    &lt;h:form id=&quot;formAdvancedExample&quot;&gt;
+        &lt;x:modalMessages/&gt;
 
-                            &lt;h:panelGrid columns=&quot;2&quot; &gt;
+        &lt;h:panelGrid columns=&quot;2&quot; &gt;
 
-                                &lt;h:outputLabel value=&quot;Name:&quot; /&gt;
-                                &lt;p:inputText&gt;
-                                    &lt;x:restriction property=&quot;name&quot; type=&quot;like&quot; likeType=&quot;begin&quot; ilike=&quot;false&quot;  /&gt;
-                                &lt;/p:inputText&gt;
+            &lt;h:outputLabel value=&quot;Name:&quot; /&gt;
+            &lt;h:panelGroup&gt;
+                &lt;h:selectOneMenu value=&quot;\#{nameRestriction}&quot;&gt;
+                    &lt;f:selectItem itemLabel=&quot;equals&quot; itemValue=&quot;eq&quot;/&gt;
+                    &lt;f:selectItem itemLabel=&quot;like&quot; itemValue=&quot;like&quot;/&gt;
+                &lt;/h:selectOneMenu&gt;
+                &lt;p:inputText&gt;
+                    &lt;x:restriction property=&quot;name&quot; type=&quot;\#{nameRestriction}&quot;  /&gt;
+                &lt;/p:inputText&gt;
+            &lt;/h:panelGroup&gt;
 
-                                &lt;h:outputLabel value=&quot;CPF:&quot; /&gt;
-                                &lt;x:cpf&gt;
-                                    &lt;x:restriction property=&quot;cpf&quot;  /&gt;
-                                &lt;/x:cpf&gt;
+            &lt;h:outputLabel value=&quot;CPF:&quot; /&gt;
+            &lt;x:cpf&gt;
+                &lt;x:restriction property=&quot;cpf&quot;  /&gt;
+            &lt;/x:cpf&gt;
 
-                                &lt;h:outputLabel value=&quot;Group:&quot; /&gt;
-                                &lt;h:selectManyCheckbox converter=&quot;entityConverter&quot;   &gt;
-                                    &lt;x:restriction property=&quot;group&quot;  type=&quot;in&quot;/&gt;
-                                    &lt;f:selectItem itemLabel=&quot;\#{xmsg['select']}&quot; /&gt;
-                                    &lt;f:selectItems value=&quot;\#{findAllBean.get(classMB.group)}&quot; 
-                                                   var=&quot;group&quot;
-                                                   itemLabel=&quot;\#{group}&quot;/&gt;
-                                &lt;/h:selectManyCheckbox&gt;
+            &lt;h:outputLabel value=&quot;Group:&quot; /&gt;
+            &lt;h:selectManyCheckbox converter=&quot;entityConverter&quot;   &gt;
+                &lt;x:restriction property=&quot;group&quot; type=&quot;in&quot; /&gt;
+                &lt;f:selectItems value=&quot;\#{findAllBean.get(classMB.group)}&quot; 
+                               var=&quot;group&quot;
+                               itemLabel=&quot;\#{group}&quot;/&gt;
+            &lt;/h:selectManyCheckbox&gt;
 
-                                &lt;h:outputLabel value=&quot;Status:&quot; /&gt;
-                                &lt;h:selectManyCheckbox  converter=&quot;omnifaces.GenericEnumConverter&quot; &gt;
-                                    &lt;x:restriction property=&quot;status&quot; type=&quot;in&quot;  /&gt;
-                                    &lt;f:selectItems value=&quot;\#{findAllBean.get(classMB.status)}&quot; 
-                                                   var=&quot;status&quot;
-                                                   itemLabel=&quot;\#{status}&quot;/&gt;
-                                &lt;/h:selectManyCheckbox&gt;
+            &lt;h:outputLabel value=&quot;Status:&quot; /&gt;
+            &lt;h:selectManyCheckbox  converter=&quot;omnifaces.GenericEnumConverter&quot; &gt;
+                &lt;x:restriction property=&quot;status&quot; type=&quot;in&quot;  /&gt;
+                &lt;f:selectItems value=&quot;\#{findAllBean.get(classMB.status)}&quot; 
+                               var=&quot;status&quot;
+                               itemLabel=&quot;\#{status}&quot;/&gt;
+            &lt;/h:selectManyCheckbox&gt;
 
-                                &lt;h:outputLabel value=&quot;Active:&quot; /&gt;
-                                &lt;h:selectOneMenu converter=&quot;javax.faces.Boolean&quot; &gt;
-                                    &lt;x:restriction property=&quot;active&quot;  /&gt;
-                                    &lt;f:selectItem itemLabel=&quot;Todos&quot;/&gt;
-                                    &lt;f:selectItems value=&quot;\#{booleanSelectItens}&quot; /&gt;
-                                &lt;/h:selectOneMenu&gt;
+            &lt;h:outputLabel value=&quot;Active:&quot; /&gt;
+            &lt;h:selectOneMenu converter=&quot;javax.faces.Boolean&quot; &gt;
+                &lt;x:restriction property=&quot;active&quot;  /&gt;
+                &lt;f:selectItem itemLabel=&quot;Todos&quot;/&gt;
+                &lt;f:selectItems value=&quot;\#{booleanSelectItens}&quot; /&gt;
+            &lt;/h:selectOneMenu&gt;
 
-                                &lt;h:outputLabel value=&quot;Birthday:&quot; /&gt;
-                                &lt;h:panelGrid columns=&quot;3&quot;&gt;
-                                    &lt;p:calendar&gt;
-                                        &lt;x:restriction property=&quot;birthday&quot; type=&quot;gte&quot; /&gt;
-                                    &lt;/p:calendar&gt;
-                                    to
-                                    &lt;p:calendar&gt;
-                                        &lt;x:restriction property=&quot;birthday&quot; type=&quot;lte&quot;  /&gt;
-                                    &lt;/p:calendar&gt;
-                                &lt;/h:panelGrid&gt;
+            &lt;h:outputLabel value=&quot;Birthday:&quot; /&gt;
+            &lt;h:panelGrid columns=&quot;3&quot;&gt;
+                &lt;p:calendar&gt;
+                    &lt;x:restriction property=&quot;birthday&quot; type=&quot;gte&quot; /&gt;
+                &lt;/p:calendar&gt;
+                to
+                &lt;p:calendar&gt;
+                    &lt;x:restriction property=&quot;birthday&quot; type=&quot;lte&quot;  /&gt;
+                &lt;/p:calendar&gt;
+            &lt;/h:panelGrid&gt;
 
-                                &lt;h:outputLabel value=&quot;Salary:&quot; /&gt;
-                                &lt;h:panelGrid columns=&quot;3&quot; &gt;
-                                    &lt;x:inputNumber value=&quot;\#{salaryBegin}&quot;&gt;
-                                        &lt;x:restriction property=&quot;salary&quot; type=&quot;gte&quot;  /&gt;
-                                    &lt;/x:inputNumber&gt;
-                                    to
-                                    &lt;x:inputNumber value=&quot;\#{salaryEnd}&quot;&gt;
-                                        &lt;x:restriction property=&quot;salary&quot; type=&quot;lte&quot;  /&gt;
-                                    &lt;/x:inputNumber&gt;
+            &lt;h:outputLabel value=&quot;Has Salary:&quot; /&gt;
+            &lt;h:selectOneMenu converter=&quot;javax.faces.Boolean&quot; &gt;
+                &lt;x:restriction property=&quot;salary&quot; type=&quot;notnull&quot; /&gt;
+                &lt;f:selectItem itemLabel=&quot;Todos&quot;/&gt;
+                &lt;f:selectItems value=&quot;\#{booleanSelectItens}&quot; /&gt;
+            &lt;/h:selectOneMenu&gt;
 
-                                &lt;/h:panelGrid&gt;
+            &lt;h:outputLabel value=&quot;Salary:&quot; /&gt;
+            &lt;h:panelGrid columns=&quot;3&quot; &gt;
+                &lt;x:inputNumber value=&quot;\#{salaryBegin}&quot;&gt;
+                    &lt;x:restriction property=&quot;salary&quot; type=&quot;gte&quot;  /&gt;
+                &lt;/x:inputNumber&gt;
+                to
+                &lt;x:inputNumber value=&quot;\#{salaryEnd}&quot;&gt;
+                    &lt;x:restriction property=&quot;salary&quot; type=&quot;lte&quot;  /&gt;
+                &lt;/x:inputNumber&gt;
 
-                            &lt;/h:panelGrid&gt;
+            &lt;/h:panelGrid&gt;
 
-                            &lt;p:commandButton value=&quot;Filter&quot; icon=&quot;ui-icon-search&quot;  process=&quot;@form&quot; update=&quot;@form&quot; actionListener=&quot;\#{restrictionComponentMB.verifyRestrictions}&quot;&gt;
-                                &lt;x:restrictionCollector addTo=&quot;\#{restrictionComponentMB.dataModelPerson}&quot; debug=&quot;true&quot;  /&gt;
-                            &lt;/p:commandButton&gt;
+        &lt;/h:panelGrid&gt;
 
-                            &lt;p:commandButton value=&quot;Limpar&quot; icon=&quot;ui-icon-close&quot;  process=&quot;@this&quot; update=&quot;@form&quot;  action=&quot;\#{restrictionComponentMB.init}&quot;&gt;
-                                &lt;p:resetInput target=&quot;@form&quot;/&gt;
-                            &lt;/p:commandButton&gt;
+        &lt;p:commandButton value=&quot;Filter&quot; icon=&quot;ui-icon-search&quot;  process=&quot;@form&quot; update=&quot;@form&quot; actionListener=&quot;\#{restrictionComponentMB.verifyRestrictions}&quot;&gt;
+            &lt;x:restrictionCollector addTo=&quot;\#{restrictionComponentMB.dataModelPerson}&quot; debug=&quot;true&quot;  /&gt;
+        &lt;/p:commandButton&gt;
 
-                            &lt;p:dataTable paginator=&quot;true&quot; rows=&quot;5&quot; paginatorPosition=&quot;bottom&quot;
-                                         var=&quot;person&quot; rowIndexVar=&quot;index&quot;
-                                         currentPageReportTemplate=&quot;\#{restrictionComponentMB.dataModelPerson.currentPageReportTemplate}&quot;
-                                         paginatorTemplate=&quot;\#{restrictionComponentMB.dataModelPerson.paginatorTemplate}&quot;
-                                         value=&quot;\#{restrictionComponentMB.dataModelPerson}&quot; lazy=&quot;true&quot; &gt;
-                                &lt;p:column styleClass=&quot;uix-datatable-index&quot;&gt;
-                                    &lt;h:outputText value=&quot;\#{index+1}&quot;/&gt;
-                                &lt;/p:column&gt;
-                                &lt;p:column headerText=&quot;\#{msg['person.name']}&quot; sortBy=&quot;\#{person.name}&quot;
-                                          &gt;
-                                    &lt;h:outputText value=&quot;\#{person.name}&quot;/&gt;
-                                &lt;/p:column&gt;
-                                &lt;p:column headerText=&quot;\#{msg['person.cpf']}&quot; sortBy=&quot;\#{person.cpf}&quot;
-                                          &gt;
-                                    &lt;h:outputText value=&quot;\#{person.cpf}&quot;/&gt;
-                                &lt;/p:column&gt;
-                                &lt;p:column headerText=&quot;\#{msg['person.birthday']}&quot; sortBy=&quot;\#{person.birthday}&quot;
-                                          &gt;
-                                    &lt;h:outputText value=&quot;\#{person.birthday}&quot;&gt;
-                                        &lt;f:convertDateTime /&gt;
-                                    &lt;/h:outputText&gt;
-                                &lt;/p:column&gt;
-                                &lt;p:column headerText=&quot;\#{msg['person.salary']}&quot; sortBy=&quot;\#{person.salary}&quot;
-                                          style=&quot;text-align: right;&quot;&gt;
-                                    &lt;h:outputText value=&quot;\#{person.salary}&quot;&gt;
-                                        &lt;f:convertNumber minFractionDigits=&quot;2&quot; maxFractionDigits=&quot;2&quot; /&gt;
-                                    &lt;/h:outputText&gt;
-                                &lt;/p:column&gt;
-                                &lt;p:column headerText=&quot;\#{msg['person.status']}&quot; sortBy=&quot;\#{person.status}&quot;
-                                          &gt;
-                                    &lt;h:outputText value=&quot;\#{person.status}&quot;/&gt;
-                                &lt;/p:column&gt;
-                                &lt;p:column headerText=&quot;\#{msg['person.group']}&quot; sortBy=&quot;\#{person.group}&quot;
-                                          &gt;
-                                    &lt;h:outputText value=&quot;\#{person.group}&quot;&gt;
-                                        &lt;x:initializer/&gt;
-                                    &lt;/h:outputText&gt;
-                                &lt;/p:column&gt;
-                                &lt;p:column headerText=&quot;\#{msg['person.active']}&quot; sortBy=&quot;\#{person.active}&quot;  style=&quot;text-align: center;&quot;&gt;
-                                    &lt;h:outputText value=&quot;\#{person.active}&quot; converter =&quot;yesNoConverter&quot; /&gt;
-                                &lt;/p:column&gt;
-                            &lt;/p:dataTable&gt;
+        &lt;p:commandButton value=&quot;Limpar&quot; icon=&quot;ui-icon-close&quot;  process=&quot;@this&quot; update=&quot;@form&quot;  action=&quot;\#{restrictionComponentMB.init}&quot;&gt;
+            &lt;p:resetInput target=&quot;@form&quot;/&gt;
+        &lt;/p:commandButton&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
 
-                        &lt;/h:form&gt;
+        &lt;p:dataTable paginator=&quot;true&quot; rows=&quot;5&quot; paginatorPosition=&quot;bottom&quot;
+                     var=&quot;person&quot; rowIndexVar=&quot;index&quot;
+                     currentPageReportTemplate=&quot;\#{restrictionComponentMB.dataModelPerson.currentPageReportTemplate}&quot;
+                     paginatorTemplate=&quot;\#{restrictionComponentMB.dataModelPerson.paginatorTemplate}&quot;
+                     value=&quot;\#{restrictionComponentMB.dataModelPerson}&quot; lazy=&quot;true&quot; &gt;
+            &lt;p:column styleClass=&quot;uix-datatable-index&quot;&gt;
+                &lt;h:outputText value=&quot;\#{index+1}&quot;/&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText=&quot;\#{msg['person.name']}&quot; sortBy=&quot;\#{person.name}&quot;
+                      &gt;
+                &lt;h:outputText value=&quot;\#{person.name}&quot;/&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText=&quot;\#{msg['person.cpf']}&quot; sortBy=&quot;\#{person.cpf}&quot;
+                      &gt;
+                &lt;h:outputText value=&quot;\#{person.cpf}&quot;/&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText=&quot;\#{msg['person.birthday']}&quot; sortBy=&quot;\#{person.birthday}&quot;
+                      &gt;
+                &lt;h:outputText value=&quot;\#{person.birthday}&quot;&gt;
+                    &lt;f:convertDateTime /&gt;
+                &lt;/h:outputText&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText=&quot;\#{msg['person.salary']}&quot; sortBy=&quot;\#{person.salary}&quot;
+                      style=&quot;text-align: right;&quot;&gt;
+                &lt;h:outputText value=&quot;\#{person.salary}&quot;&gt;
+                    &lt;f:convertNumber minFractionDigits=&quot;2&quot; maxFractionDigits=&quot;2&quot; /&gt;
+                &lt;/h:outputText&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText=&quot;\#{msg['person.status']}&quot; sortBy=&quot;\#{person.status}&quot;
+                      &gt;
+                &lt;h:outputText value=&quot;\#{person.status}&quot;/&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText=&quot;\#{msg['person.group']}&quot; sortBy=&quot;\#{person.group}&quot;
+                      &gt;
+                &lt;h:outputText value=&quot;\#{person.group}&quot;&gt;
+                    &lt;x:initializer/&gt;
+                &lt;/h:outputText&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText=&quot;\#{msg['person.active']}&quot; sortBy=&quot;\#{person.active}&quot;  style=&quot;text-align: center;&quot;&gt;
+                &lt;h:outputText value=&quot;\#{person.active}&quot; converter =&quot;yesNoConverter&quot; /&gt;
+            &lt;/p:column&gt;
+        &lt;/p:dataTable&gt;
+
+    &lt;/h:form&gt;
                     </pre>   
                 </p:tab>
                 <p:tab title="RestrictionComponentMB.java">
