@@ -23,6 +23,17 @@
                     <x:restriction property="name" type="#{nameRestriction}"  />
                 </p:inputText>
             </h:panelGroup>
+            
+            <h:outputLabel value="Code:" />
+            <h:panelGroup>
+                <h:selectOneMenu value="#{codeRestriction}">
+                    <f:selectItem itemLabel="equals" itemValue="eq"/>
+                    <f:selectItem itemLabel="like" itemValue="like"/>
+                </h:selectOneMenu>
+                <p:inputText>
+                    <x:restriction property="code" castAs="string" type="#{codeRestriction}"  />
+                </p:inputText>
+            </h:panelGroup>
 
             <h:outputLabel value="CPF:" />
             <x:cpf>
@@ -102,16 +113,16 @@
             <p:column styleClass="uix-datatable-index">
                 <h:outputText value="#{index+1}"/>
             </p:column>
-            <p:column headerText="#{msg['person.name']}" sortBy="#{person.name}"
-                      >
+            <p:column headerText="#{msg['person.code']}" sortBy="#{person.code}"  >
+                <h:outputText value="#{person.code}"/>
+            </p:column>
+            <p:column headerText="#{msg['person.name']}" sortBy="#{person.name}"  >
                 <h:outputText value="#{person.name}"/>
             </p:column>
-            <p:column headerText="#{msg['person.cpf']}" sortBy="#{person.cpf}"
-                      >
+            <p:column headerText="#{msg['person.cpf']}" sortBy="#{person.cpf}">
                 <h:outputText value="#{person.cpf}"/>
             </p:column>
-            <p:column headerText="#{msg['person.birthday']}" sortBy="#{person.birthday}"
-                      >
+            <p:column headerText="#{msg['person.birthday']}" sortBy="#{person.birthday}">
                 <h:outputText value="#{person.birthday}">
                     <f:convertDateTime />
                 </h:outputText>
@@ -122,12 +133,10 @@
                     <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
                 </h:outputText>
             </p:column>
-            <p:column headerText="#{msg['person.status']}" sortBy="#{person.status}"
-                      >
+            <p:column headerText="#{msg['person.status']}" sortBy="#{person.status}" >
                 <h:outputText value="#{person.status}"/>
             </p:column>
-            <p:column headerText="#{msg['person.group']}" sortBy="#{person.group}"
-                      >
+            <p:column headerText="#{msg['person.group']}" sortBy="#{person.group}">
                 <h:outputText value="#{person.group}">
                     <x:initializer/>
                 </h:outputText>
@@ -145,7 +154,7 @@
             <p:tabView>
                 <p:tab title="XHTML">
                     <pre  name="code" class="xml">
-    &lt;h:form id=&quot;formAdvancedExample&quot;&gt;
+ &lt;h:form id=&quot;formAdvancedExample&quot;&gt;
         &lt;x:modalMessages/&gt;
 
         &lt;h:panelGrid columns=&quot;2&quot; &gt;
@@ -158,6 +167,17 @@
                 &lt;/h:selectOneMenu&gt;
                 &lt;p:inputText&gt;
                     &lt;x:restriction property=&quot;name&quot; type=&quot;\#{nameRestriction}&quot;  /&gt;
+                &lt;/p:inputText&gt;
+            &lt;/h:panelGroup&gt;
+            
+            &lt;h:outputLabel value=&quot;Code:&quot; /&gt;
+            &lt;h:panelGroup&gt;
+                &lt;h:selectOneMenu value=&quot;\#{codeRestriction}&quot;&gt;
+                    &lt;f:selectItem itemLabel=&quot;equals&quot; itemValue=&quot;eq&quot;/&gt;
+                    &lt;f:selectItem itemLabel=&quot;like&quot; itemValue=&quot;like&quot;/&gt;
+                &lt;/h:selectOneMenu&gt;
+                &lt;p:inputText&gt;
+                    &lt;x:restriction property=&quot;code&quot; castAs=&quot;string&quot; type=&quot;\#{codeRestriction}&quot;  /&gt;
                 &lt;/p:inputText&gt;
             &lt;/h:panelGroup&gt;
 
@@ -239,16 +259,16 @@
             &lt;p:column styleClass=&quot;uix-datatable-index&quot;&gt;
                 &lt;h:outputText value=&quot;\#{index+1}&quot;/&gt;
             &lt;/p:column&gt;
-            &lt;p:column headerText=&quot;\#{msg['person.name']}&quot; sortBy=&quot;\#{person.name}&quot;
-                      &gt;
+            &lt;p:column headerText=&quot;\#{msg['person.code']}&quot; sortBy=&quot;\#{person.code}&quot;  &gt;
+                &lt;h:outputText value=&quot;\#{person.code}&quot;/&gt;
+            &lt;/p:column&gt;
+            &lt;p:column headerText=&quot;\#{msg['person.name']}&quot; sortBy=&quot;\#{person.name}&quot;  &gt;
                 &lt;h:outputText value=&quot;\#{person.name}&quot;/&gt;
             &lt;/p:column&gt;
-            &lt;p:column headerText=&quot;\#{msg['person.cpf']}&quot; sortBy=&quot;\#{person.cpf}&quot;
-                      &gt;
+            &lt;p:column headerText=&quot;\#{msg['person.cpf']}&quot; sortBy=&quot;\#{person.cpf}&quot;&gt;
                 &lt;h:outputText value=&quot;\#{person.cpf}&quot;/&gt;
             &lt;/p:column&gt;
-            &lt;p:column headerText=&quot;\#{msg['person.birthday']}&quot; sortBy=&quot;\#{person.birthday}&quot;
-                      &gt;
+            &lt;p:column headerText=&quot;\#{msg['person.birthday']}&quot; sortBy=&quot;\#{person.birthday}&quot;&gt;
                 &lt;h:outputText value=&quot;\#{person.birthday}&quot;&gt;
                     &lt;f:convertDateTime /&gt;
                 &lt;/h:outputText&gt;
@@ -259,12 +279,10 @@
                     &lt;f:convertNumber minFractionDigits=&quot;2&quot; maxFractionDigits=&quot;2&quot; /&gt;
                 &lt;/h:outputText&gt;
             &lt;/p:column&gt;
-            &lt;p:column headerText=&quot;\#{msg['person.status']}&quot; sortBy=&quot;\#{person.status}&quot;
-                      &gt;
+            &lt;p:column headerText=&quot;\#{msg['person.status']}&quot; sortBy=&quot;\#{person.status}&quot; &gt;
                 &lt;h:outputText value=&quot;\#{person.status}&quot;/&gt;
             &lt;/p:column&gt;
-            &lt;p:column headerText=&quot;\#{msg['person.group']}&quot; sortBy=&quot;\#{person.group}&quot;
-                      &gt;
+            &lt;p:column headerText=&quot;\#{msg['person.group']}&quot; sortBy=&quot;\#{person.group}&quot;&gt;
                 &lt;h:outputText value=&quot;\#{person.group}&quot;&gt;
                     &lt;x:initializer/&gt;
                 &lt;/h:outputText&gt;
