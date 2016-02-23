@@ -41,7 +41,7 @@
             <h:outputLabel value="Permission:" />
             <h:selectOneMenu converter="entityConverter" >
                 <x:restriction property="p.permissions" type="memberof" />
-                <f:selectItem itemLabel=""/>
+                <f:selectItem itemLabel="#{xmsg['select']}"/>
                 <f:selectItems value="#{findAllBean.get(classMB.permission)}" 
                                var="permission"
                                itemLabel="#{permission}"/>
@@ -121,7 +121,7 @@
             &lt;h:outputLabel value=&quot;Permission:&quot; /&gt;
             &lt;h:selectOneMenu converter=&quot;entityConverter&quot; &gt;
                 &lt;x:restriction property=&quot;p.permissions&quot; type=&quot;memberof&quot; /&gt;
-                &lt;f:selectItem itemLabel=&quot;&quot;/&gt;
+                &lt;f:selectItem itemLabel=&quot;\#{xmsg['select']}&quot;/&gt;
                 &lt;f:selectItems value=&quot;\#{findAllBean.get(classMB.permission)}&quot; 
                                var=&quot;permission&quot;
                                itemLabel=&quot;\#{permission}&quot;/&gt;
