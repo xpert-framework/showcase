@@ -40,11 +40,6 @@ public class CountryBO extends AbstractBusinessObject<Country> {
 
     
     @Override
-    public void save(Country country) throws BusinessException {
-        super.save(country); 
-    }
-    
-    @Override
     public boolean isAudit() {
         return true;
     }
