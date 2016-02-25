@@ -27,8 +27,6 @@ public class PersonMB extends AbstractBaseBean<Person> {
 
     @Override
     public String getDataModelOrder() {
-        
-        
         return "p.name";
     }
 
