@@ -46,6 +46,13 @@
                                var="permission"
                                itemLabel="#{permission}"/>
             </h:selectOneMenu>
+            
+            <h:outputLabel value="Is Empty Permissions:" />
+            <h:selectOneMenu converter="javax.faces.Boolean" >
+                <x:restriction property="p.permissions" type="empty" />
+                <f:selectItem itemLabel="Todos"/>
+                <f:selectItems value="#{booleanSelectItens}" />
+            </h:selectOneMenu>
 
         </h:panelGrid>
 
@@ -125,6 +132,13 @@
                 &lt;f:selectItems value=&quot;\#{findAllBean.get(classMB.permission)}&quot; 
                                var=&quot;permission&quot;
                                itemLabel=&quot;\#{permission}&quot;/&gt;
+            &lt;/h:selectOneMenu&gt;
+
+            &lt;h:outputLabel value=&quot;Is Empty Permissions:&quot; /&gt;
+            &lt;h:selectOneMenu converter=&quot;javax.faces.Boolean&quot; &gt;
+                &lt;x:restriction property=&quot;p.permissions&quot; type=&quot;empty&quot; /&gt;
+                &lt;f:selectItem itemLabel=&quot;Todos&quot;/&gt;
+                &lt;f:selectItems value=&quot;\#{booleanSelectItens}&quot; /&gt;
             &lt;/h:selectOneMenu&gt;
 
         &lt;/h:panelGrid&gt;
