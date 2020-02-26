@@ -2,7 +2,8 @@ package com.xpert.showcase.mb;
 
 import com.xpert.Constants;
 import javax.faces.bean.ManagedBean;
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
+import org.primefaces.context.PrimeRequestContext;
 
 /**
  *
@@ -15,7 +16,7 @@ public class ConstantMB {
         return Constants.VERSION;
     }
     public String getPrimefacesVersion(){
-        return RequestContext.getCurrentInstance().getApplicationContext().getConfig().getBuildVersion();
+        return PrimeRequestContext.getCurrentInstance().getApplicationContext().getEnvironment().getBuildVersion();
     }
     
 }

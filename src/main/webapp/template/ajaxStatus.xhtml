@@ -11,7 +11,7 @@
                   oncomplete="PF('loadingGif').hide();"/>
 
     <p:dialog modal="true" widgetVar="loadingGif" closable="false" styleClass="fixed"
-              appendToBody="true" width="230" resizable="false" showHeader="false">
+              appendTo="@(body)" width="230" resizable="false" showHeader="false">
         <h:panelGrid columns="2">
             <h:outputText style="font-size: 14px; font-weight: bold;" value="Carregando..." />
         </h:panelGrid>
