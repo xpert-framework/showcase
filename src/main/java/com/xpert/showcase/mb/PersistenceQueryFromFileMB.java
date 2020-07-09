@@ -2,6 +2,7 @@ package com.xpert.showcase.mb;
 
 import com.xpert.showcase.dao.PersonDAO;
 import com.xpert.showcase.model.Person;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -12,7 +13,7 @@ import javax.faces.bean.ManagedBean;
  * @author Ayslan
  */
 @ManagedBean
-public class PersistenceQueryFromFileMB {
+public class PersistenceQueryFromFileMB implements Serializable{
     
     @EJB
     private PersonDAO personDAO;

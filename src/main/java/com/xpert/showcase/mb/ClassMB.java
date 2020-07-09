@@ -6,14 +6,14 @@ import com.xpert.showcase.model.City;
 import com.xpert.showcase.model.Country;
 import com.xpert.showcase.model.Group;
 import com.xpert.showcase.model.Permission;
-import com.xpert.showcase.model.Person;
 import com.xpert.showcase.model.State;
 import com.xpert.showcase.model.Status;
 import com.xpert.showcase.model.StatusGroup;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean
-public class ClassMB {
+public class ClassMB implements Serializable{
 
     public Class getAuditing() {
         return Auditing.class;

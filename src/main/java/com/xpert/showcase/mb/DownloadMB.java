@@ -1,10 +1,8 @@
 package com.xpert.showcase.mb;
 
 import com.xpert.faces.utils.FacesUtils;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -12,7 +10,7 @@ import javax.faces.bean.ManagedBean;
  * @author Ayslan
  */
 @ManagedBean
-public class DownloadMB {
+public class DownloadMB implements Serializable{
     
     public void download() throws IOException, InterruptedException {
         String fileContent = "This is xpert-framework";

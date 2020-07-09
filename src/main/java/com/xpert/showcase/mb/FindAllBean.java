@@ -2,6 +2,7 @@ package com.xpert.showcase.mb;
 
 import com.xpert.faces.bean.ClassModel;
 import com.xpert.showcase.model.*;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
@@ -13,7 +14,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class FindAllBean extends com.xpert.faces.bean.FindAllBean {
+public class FindAllBean extends com.xpert.faces.bean.FindAllBean implements Serializable{
 
     private static final Map<Class, ClassModel> MODEL = new HashMap<Class, ClassModel>();
 

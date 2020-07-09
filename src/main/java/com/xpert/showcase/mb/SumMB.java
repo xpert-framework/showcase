@@ -3,6 +3,7 @@ package com.xpert.showcase.mb;
 import com.xpert.faces.primefaces.LazyDataModelImpl;
 import com.xpert.showcase.dao.PersonDAO;
 import com.xpert.showcase.model.Person;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class SumMB {
+public class SumMB implements Serializable{
     
     @EJB
     private PersonDAO personDAO;

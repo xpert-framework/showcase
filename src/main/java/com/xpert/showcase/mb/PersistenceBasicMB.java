@@ -4,7 +4,7 @@ import com.xpert.persistence.query.Restriction;
 import com.xpert.persistence.query.RestrictionType;
 import com.xpert.showcase.dao.PersonDAO;
 import com.xpert.showcase.model.Person;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -15,7 +15,7 @@ import javax.faces.bean.ManagedBean;
  * @author Ayslan
  */
 @ManagedBean
-public class PersistenceBasicMB {
+public class PersistenceBasicMB implements Serializable{
     
     @EJB
     private PersonDAO personDAO;

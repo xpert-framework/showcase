@@ -2,6 +2,7 @@ package com.xpert.showcase.mb;
 
 import com.xpert.showcase.dao.PersonDAO;
 import com.xpert.showcase.model.Person;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
@@ -10,7 +11,7 @@ import javax.faces.bean.ManagedBean;
  * @author Ayslan
  */
 @ManagedBean
-public class SavePerson {
+public class SavePerson implements Serializable{
     
     @EJB
     private PersonDAO personDAO;

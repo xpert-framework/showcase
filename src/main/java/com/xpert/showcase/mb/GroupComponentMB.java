@@ -5,7 +5,7 @@ import com.xpert.showcase.model.Country;
 import com.xpert.showcase.model.Person;
 import com.xpert.showcase.model.State;
 import com.xpert.showcase.model.Status;
-import com.xpert.utils.CollectionsUtils;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +20,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class GroupComponentMB {
+public class GroupComponentMB implements Serializable{
 
     private List<Person> people = new ArrayList<Person>();
 

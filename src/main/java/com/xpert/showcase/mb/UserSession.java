@@ -3,6 +3,7 @@ package com.xpert.showcase.mb;
 import com.xpert.security.SecuritySessionManager;
 import com.xpert.security.model.Role;
 import com.xpert.showcase.model.UserRole;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class UserSession {
+public class UserSession implements Serializable{
 
     private Date startSession = new Date();
 

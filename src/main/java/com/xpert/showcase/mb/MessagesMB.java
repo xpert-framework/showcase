@@ -1,6 +1,7 @@
 package com.xpert.showcase.mb;
 
 import com.xpert.faces.utils.FacesMessageUtils;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -8,7 +9,7 @@ import javax.faces.bean.ManagedBean;
  * @author Ayslan
  */
 @ManagedBean
-public class MessagesMB {
+public class MessagesMB implements Serializable{
 
     public void warn() {
         FacesMessageUtils.warning("Warning message. Warning message. This is a long message, for size test. Very long long message.");

@@ -3,6 +3,7 @@ package com.xpert.showcase.mb;
 import com.xpert.faces.primefaces.LazyDataModelImpl;
 import com.xpert.showcase.dao.PersonDAO;
 import com.xpert.showcase.model.Person;
+import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -15,7 +16,7 @@ import org.primefaces.model.LazyDataModel;
  */
 @ManagedBean
 @ViewScoped
-public class LazyDataModelMB {
+public class LazyDataModelMB implements Serializable{
     
     @EJB
     private PersonDAO personDAO;

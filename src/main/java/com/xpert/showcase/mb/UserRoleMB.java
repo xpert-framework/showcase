@@ -3,7 +3,6 @@ package com.xpert.showcase.mb;
 
 import java.io.Serializable;
 import com.xpert.core.crud.AbstractBaseBean;
-import com.xpert.core.crud.AbstractBusinessObject;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;

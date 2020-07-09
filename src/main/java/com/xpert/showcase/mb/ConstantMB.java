@@ -1,8 +1,8 @@
 package com.xpert.showcase.mb;
 
 import com.xpert.Constants;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import org.primefaces.PrimeFaces;
 import org.primefaces.context.PrimeRequestContext;
 
 /**
@@ -10,7 +10,7 @@ import org.primefaces.context.PrimeRequestContext;
  * @author Ayslan
  */
 @ManagedBean
-public class ConstantMB {
+public class ConstantMB implements Serializable{
     
     public String getXpertFrameworkVersion(){
         return Constants.VERSION;

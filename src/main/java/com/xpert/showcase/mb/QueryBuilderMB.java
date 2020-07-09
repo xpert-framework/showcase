@@ -1,9 +1,9 @@
 package com.xpert.showcase.mb;
 
-import com.xpert.persistence.query.QueryBuilder;
 import com.xpert.showcase.dao.PersonDAO;
 import com.xpert.showcase.model.Person;
 import com.xpert.showcase.model.Status;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -17,7 +17,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class QueryBuilderMB {
+public class QueryBuilderMB implements Serializable{
     
     private List<Person> example1 ;
     private List<Person> example2 ;

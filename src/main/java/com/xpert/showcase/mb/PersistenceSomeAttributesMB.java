@@ -3,7 +3,7 @@ package com.xpert.showcase.mb;
 import com.xpert.faces.utils.FacesMessageUtils;
 import com.xpert.showcase.dao.PersonDAO;
 import com.xpert.showcase.model.Person;
-import com.xpert.showcase.model.Status;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -13,7 +13,7 @@ import javax.faces.bean.ManagedBean;
  * @author Ayslan
  */
 @ManagedBean
-public class PersistenceSomeAttributesMB {
+public class PersistenceSomeAttributesMB implements Serializable{
     
     @EJB
     private PersonDAO personDAO;

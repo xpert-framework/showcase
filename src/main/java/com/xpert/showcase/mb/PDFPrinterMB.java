@@ -1,6 +1,7 @@
 package com.xpert.showcase.mb;
 
 import com.xpert.showcase.model.Person;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -14,7 +15,7 @@ import org.primefaces.extensions.component.gchart.model.GChartType;
  * @author Ayslan
  */
 @ManagedBean
-public class PDFPrinterMB {
+public class PDFPrinterMB implements Serializable{
 
     private List<Person> people = new ArrayList<Person>();
     private GChartModel pieChart = null;
